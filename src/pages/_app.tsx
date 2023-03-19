@@ -1,6 +1,12 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
+import {ThemeProvider} from "@mui/system";
+import movieMateTheme from "@/theme/MovieMateTheme";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+      <ThemeProvider theme={movieMateTheme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+  )
 }
