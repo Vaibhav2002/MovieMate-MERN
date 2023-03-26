@@ -3,7 +3,7 @@ export interface MoviesResponse {
     results: Movie[];
 }
 
-export interface Movie {
+export default interface Movie {
     poster_path: string;
     adult: boolean;
     overview: string;

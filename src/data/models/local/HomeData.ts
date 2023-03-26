@@ -1,11 +1,11 @@
-import {Movie} from "@/data/models/dto/movie/Movie";
+import Movie from "@/data/models/dto/movie/Movie";
+import MovieSection from "@/data/models/local/MovieSection";
 
-export interface HomeData{
-    data:MovieList[]
+export interface HomeData {
+    data: MovieSectionList[]
 }
 
-export interface MovieList{
-    header:string
-
-    movies:Movie[]
+export interface MovieSectionList {
+    header: MovieSection
+    movies: Movie[]
 }
