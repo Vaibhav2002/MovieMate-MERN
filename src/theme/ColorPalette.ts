@@ -1,5 +1,7 @@
-const colorPalette = {
-    type:'dark',
+import {PaletteOptions} from "@mui/material";
+
+const colorPalette:PaletteOptions = {
+    mode: 'dark',
     primary: {
         main: '#D32F2F', // red
         dark: '#9A0007',
