@@ -2,8 +2,8 @@ import React from 'react';
 import Movie from "@/data/models/dto/movie/Movie";
 import {Box} from "@mui/system";
 import Image from "next/image";
-import styles from "./MovieItem.module.css"
 import RatingBadge from "@/components/ratingBadge/RatingBadge";
+import componentStyles from "@/styles/components/components.module.css";
 
 interface MovieItemProps {
     movie: Movie
@@ -12,12 +12,15 @@ interface MovieItemProps {
 
 const MovieItem = ({movie, className}: MovieItemProps) => {
     return (
-        <Box className={`${styles.card} ${className}`}>
+        <Box
+            className={`${componentStyles.posterCard} ${className}`}
+            position="relative"
+        >
             <Image
                 src={movie.poster_path}
                 alt={movie.title}
-                height={200}
-                width={150}
+                height={233}
+                width={175}
                 layout="responsive"
                 style={{objectFit: "cover"}}
             />
@@ -27,7 +30,7 @@ const MovieItem = ({movie, className}: MovieItemProps) => {
                     top: 8,
                     right: 8,
                 }}>
-                <RatingBadge rating={4.5}/>
+                <RatingBadge rating={movie.vote_average}/>
             </Box>
 
         </Box>
