@@ -3,8 +3,10 @@ import Section from "@/data/models/local/MovieSection";
 import {MovieSectionList} from "@/data/models/local/HomeData";
 import {Box, Button, Stack, Typography} from "@mui/material";
 import MovieItem from "@/components/movieItem/MovieItem";
-import TrendingMovieItem from "@/components/trendingMovieItem/TrendingMovieItem";
-import styles from "./MovieSection.module.css"
+import BackdropItem from "@/components/BackdropItem/BackdropItem";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 interface MovieSectionProps {
     section: MovieSectionList
@@ -13,9 +15,16 @@ interface MovieSectionProps {
 
 const MovieSection = ({section: {header, movies}}: MovieSectionProps) => {
 
+    const isBackdropSection = header === Section.Trending
+
     const movieComponents = movies.map(movie => {
-        if (header === Section.Trending)
-            return <TrendingMovieItem key={movie.id} movie={movie}/>
+        if (isBackdropSection)
+            return <BackdropItem
+                title={movie.title}
+                backdrop={movie.backdrop_path}
+                overview={movie.overview}
+                key={movie.id}
+            />
         else
             return <MovieItem key={movie.id} movie={movie}/>
     })
@@ -31,6 +40,14 @@ const MovieSection = ({section: {header, movies}}: MovieSectionProps) => {
                 <Typography variant="h5">{header}</Typography>
                 <Button variant="text">See More</Button>
             </Box>
+
+            {/*<Carousel*/}
+            {/*    emulateTouch={true}*/}
+            {/*    centerMode={isBackdropSection}*/}
+            {/*    autoPlay={isBackdropSection}*/}
+            {/*    infiniteLoop={isBackdropSection}*/}
+            {/*    centerSlidePercentage={60}*/}
+            {/*>{movieComponents}</Carousel>*/}
 
             <Stack
                 direction="row"
