@@ -1,9 +1,10 @@
 import {HomeData} from "@/data/models/local/HomeData";
-import {Typography} from "@mui/material";
 import {GetStaticPaths, GetStaticProps} from "next";
 import axios from "axios";
-import {getBaseUrl} from "@/data/utils/ServerSideBaseUrl";
-import {Movie} from "@/data/models/dto/movie/Movie";
+import {Stack} from "@mui/material";
+import React from "react";
+import MovieSection from "@/components/movieSection/MovieSection";
+import styles from "@/styles/pages/Home.module.css";
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const slugs = ["movies"]
@@ -14,27 +15,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
 }
 
-export const getStaticProps: GetStaticProps<HomeScreenProps> = async ({params}) => {
-    const response = await axios.get<HomeData>(`${getBaseUrl()}/api/home`)
+export const getStaticProps: GetStaticProps<HomeScreenProps> = async () => {
+    const response = await axios.get<HomeData>(`http://localhost:3000/api/home`)
     const homeData = response.data
     return {
-        props: {data: homeData}
+        props: {homeData: homeData},
     }
 }
 
 interface HomeScreenProps {
-    data: HomeData
+    homeData: HomeData
 }
 
-const HomeScreen = ({data}: HomeScreenProps) => {
-    const movies = data.data.map( d=> d.movies)
-        .flat()
+const HomeScreen = ({homeData: {data}}: HomeScreenProps) => {
     return (
-        <main>
-            <Typography variant="body1" padding={2}>
-                {movies.toString()}
-            </Typography>
-        </main>
+        <>
+            <main className={styles.homeScreen}>
+                <Stack direction="column" spacing={7}>
+                    {data.map(section => <MovieSection key={section.header} section={section}/>)}
+                </Stack>
+            </main>
+        </>
     );
 };
 
