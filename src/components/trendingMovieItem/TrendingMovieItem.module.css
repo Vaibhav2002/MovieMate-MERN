@@ -1,0 +1,22 @@
+.card {
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+/**
+Does not work, but SX does work
+ */
+.gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    background-size: 100% 100%;
+    z-index: 1;
+}
