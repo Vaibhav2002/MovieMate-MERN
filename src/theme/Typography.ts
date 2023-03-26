@@ -1,14 +1,13 @@
-import MontserratRegular from '../fonts/Montserrat-Regular.ttf';
-import UrbanistRegular from '../fonts/Urbanist-Regular.ttf';
+import {TypographyOptions} from "@mui/material/styles/createTypography";
 
-const typography = {
+const typography: TypographyOptions = {
     fontFamily: [
-        'Urbanist',
         'Montserrat',
+        'Urbanist',
         'Helvetica',
         'Arial',
         'sans-serif',
-    ].join(','),
+    ].join(", "),
     h1: {
         fontFamily: 'Montserrat',
         fontWeight: 600,
@@ -57,7 +56,36 @@ const typography = {
         fontSize: '0.875rem',
         letterSpacing: '0.01071em',
     },
-    // ...other typography styles
+    subtitle1: {
+        fontFamily: 'Urbanist',
+        fontWeight: 400,
+        fontSize: '1rem',
+        letterSpacing: '0.00938em',
+    },
+    subtitle2: {
+        fontFamily: 'Urbanist',
+        fontWeight: 400,
+        fontSize: '0.875rem',
+        letterSpacing: '0.00714em',
+    },
+    button: {
+        fontFamily: 'Montserrat',
+        fontWeight: 600,
+        fontSize: '0.875rem',
+        letterSpacing: '0.02857em',
+    },
+    caption: {
+        fontFamily: 'Urbanist',
+        fontWeight: 400,
+        fontSize: '0.75rem',
+        letterSpacing: '0.03333em',
+    },
+    overline: {
+        fontFamily: 'Urbanist',
+        fontWeight: 400,
+        fontSize: '0.75rem',
+        letterSpacing: '0.08333em',
+    }
 };
 
 export default typography

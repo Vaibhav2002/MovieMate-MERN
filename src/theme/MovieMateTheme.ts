@@ -1,10 +1,10 @@
-import {createTheme} from "@mui/system";
+import {createTheme} from "@mui/material/styles";
 import colorPalette from "@/theme/ColorPalette";
 import typography from "@/theme/Typography";
 
 const movieMateTheme = createTheme({
     palette: colorPalette,
-    typography: typography
-});
+    typography: typography,
+})
 
 export default movieMateTheme;
