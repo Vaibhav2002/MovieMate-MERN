@@ -1,31 +1,27 @@
 import React from 'react';
-import Movie from "@/data/models/dto/movie/Movie";
 import {Box} from "@mui/system";
 import Image from "next/image";
-import styles from "./TrendingMovieItem.module.css"
+import styles from "./BackdropItem.module.css";
 import MultilineText from "@/components/styled/MultilineText";
 import {useMediaQuery, useTheme} from "@mui/material";
 
-interface TrendingMovieItemProps {
-    movie: Movie
+interface BackdropItemProps {
+    title:string
+    backdrop:string
+    overview:string
     className?: string
 }
 
-const TrendingMovieItem = ({movie, className}: TrendingMovieItemProps) => {
+const BackdropItem = ({title, backdrop, overview, className}: BackdropItemProps) => {
 
     const theme = useTheme()
     const useSmallBreakpoint = useMediaQuery(theme.breakpoints.up("sm"))
 
     return (
-        <Box
-            className={`${className} ${styles.card}`}
-            sx={{
-                width: {xs: "100%", sm: "80%", md: "60%"}
-            }}
-        >
+        <Box className={`${className} ${styles.backdropCard}`}>
             <Image
-                src={movie.backdrop_path}
-                alt={movie.title}
+                src={backdrop}
+                alt={title}
                 height={400}
                 width={708}
                 layout="responsive"
@@ -55,7 +51,7 @@ const TrendingMovieItem = ({movie, className}: TrendingMovieItemProps) => {
                     width={1}
                     variant="h4"
                 >
-                    {movie.title}
+                    {title}
                 </MultilineText>
 
                 <MultilineText
@@ -64,7 +60,7 @@ const TrendingMovieItem = ({movie, className}: TrendingMovieItemProps) => {
                     variant="caption"
                     color="text.secondary"
                 >
-                    {movie.overview}
+                    {overview}
                 </MultilineText>
             </Box>
 
@@ -73,4 +69,4 @@ const TrendingMovieItem = ({movie, className}: TrendingMovieItemProps) => {
 };
 
 
-export default TrendingMovieItem;
+export default BackdropItem;

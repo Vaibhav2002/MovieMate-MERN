@@ -1,0 +1,8 @@
+.backdropCard{
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
