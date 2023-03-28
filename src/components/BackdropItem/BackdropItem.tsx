@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./BackdropItem.module.css";
 import MultilineText from "@/components/styled/MultilineText";
 import {useMediaQuery, useTheme} from "@mui/material";
+import BottomGradientBox from "@/components/styled/BottomGradientBox";
 
 interface BackdropItemProps {
     title: string
@@ -32,17 +33,8 @@ const BackdropItem = ({title, backdrop, overview, className}: BackdropItemProps)
                 layout="responsive"
                 style={{objectFit: "fill"}}
             />
-            <Box
-                sx={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "60%",
-                    backgroundImage:
-                        "linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))",
-                }}
-            />
+            <BottomGradientBox height = "80%"/>
+
             <Box
                 padding={2}
                 sx={{
