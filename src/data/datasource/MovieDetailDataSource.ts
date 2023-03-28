@@ -10,7 +10,7 @@ const getMovieInfo = async <T>(id: number, url: string): Promise<T> => {
     return response.data
 };
 
-export const getMovieDetails = (id: number) => getMovieInfo<MovieDetail>(id, '/')
+export const getMovieDetails = (id: number) => getMovieInfo<MovieDetail>(id, '')
 
 export const getMovieVideos = (id: number) => getMovieInfo<VideoResponse>(id, `/videos`)
     .then(response => response.results)
