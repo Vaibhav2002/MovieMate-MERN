@@ -1,5 +1,5 @@
-import Movie from "@/data/models/dto/movie/Movie";
-import {Show} from "@/data/models/dto/movie/Show";
+import Movie from "@/data/models/dto/Movie";
+import {Show} from "@/data/models/dto/Show";
 
 const imageBaseUrl = "https://image.tmdb.org/t/p"
 const posterSize = "w500"

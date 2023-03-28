@@ -1,4 +1,4 @@
-import Movie from "@/data/models/dto/movie/Movie";
+import Movie from "@/data/models/dto/Movie";
 
 enum Section {
     Trending = "Trending movies",
