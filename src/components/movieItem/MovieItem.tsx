@@ -4,6 +4,8 @@ import {Box} from "@mui/system";
 import Image from "next/image";
 import RatingBadge from "@/components/ratingBadge/RatingBadge";
 import componentStyles from "@/styles/components/components.module.css";
+import Link from "next/link";
+import {getMovieRoute} from "@/Routes";
 
 interface MovieItemProps {
     movie: Movie
@@ -15,6 +17,8 @@ const MovieItem = ({movie, className}: MovieItemProps) => {
         <Box
             className={`${componentStyles.posterCard} ${className}`}
             position="relative"
+            component={Link}
+            href={getMovieRoute(movie.id)}
         >
             <Image
                 src={movie.poster_path}

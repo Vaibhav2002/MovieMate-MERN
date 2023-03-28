@@ -1,7 +1,7 @@
 import React from 'react';
 import Section from "@/data/models/local/Section";
 import {MovieSection} from "@/uiDataHolders/MovieSection";
-import {Box, Button, ImageList, ImageListItem, Stack, Typography} from "@mui/material";
+import {Box, Button, Stack, Typography} from "@mui/material";
 import MovieItem from "@/components/movieItem/MovieItem";
 import BackdropItem from "@/components/BackdropItem/BackdropItem";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -18,12 +18,7 @@ const MovieSectionItem = ({section: {header, movies}}: MovieSectionItemProps) =>
 
     const movieComponents = movies.map(movie => {
         if (isBackdropSection)
-            return <BackdropItem
-                title={movie.title}
-                backdrop={movie.backdrop_path}
-                overview={movie.overview}
-                key={movie.id}
-            />
+            return <BackdropItem key={movie.id} movie={movie}/>
         else
             return <MovieItem key={movie.id} movie={movie}/>
     })

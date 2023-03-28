@@ -5,15 +5,16 @@ import styles from "./BackdropItem.module.css";
 import MultilineText from "@/components/styled/MultilineText";
 import {useMediaQuery, useTheme} from "@mui/material";
 import BottomGradientBox from "@/components/styled/BottomGradientBox";
+import Link from "next/link";
+import {getMovieRoute} from "@/Routes";
+import Movie from "@/data/models/dto/Movie";
 
 interface BackdropItemProps {
-    title: string
-    backdrop: string
-    overview: string
-    className?: string
+    movie:Movie
+    className?:string
 }
 
-const BackdropItem = ({title, backdrop, overview, className}: BackdropItemProps) => {
+const BackdropItem = ({movie, className}: BackdropItemProps) => {
 
     const theme = useTheme()
     const useSmallBreakpoint = useMediaQuery(theme.breakpoints.up("sm"))
@@ -24,10 +25,12 @@ const BackdropItem = ({title, backdrop, overview, className}: BackdropItemProps)
                 width: {xs: "100%", sm: "80%", md: "55%"}
             }}
             className={`${className} ${styles.backdropCard}`}
+            component={Link}
+            href={getMovieRoute(movie.id)}
         >
             <Image
-                src={backdrop}
-                alt={title}
+                src={movie.backdrop_path}
+                alt={movie.title}
                 height={400}
                 width={708}
                 layout="responsive"
@@ -48,7 +51,7 @@ const BackdropItem = ({title, backdrop, overview, className}: BackdropItemProps)
                     width={1}
                     variant="h4"
                 >
-                    {title}
+                    {movie.title}
                 </MultilineText>
 
                 <MultilineText
@@ -57,7 +60,7 @@ const BackdropItem = ({title, backdrop, overview, className}: BackdropItemProps)
                     variant="body2"
                     color="text.secondary"
                 >
-                    {overview}
+                    {movie.overview}
                 </MultilineText>
             </Box>
 
