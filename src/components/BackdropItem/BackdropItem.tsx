@@ -6,9 +6,9 @@ import MultilineText from "@/components/styled/MultilineText";
 import {useMediaQuery, useTheme} from "@mui/material";
 
 interface BackdropItemProps {
-    title:string
-    backdrop:string
-    overview:string
+    title: string
+    backdrop: string
+    overview: string
     className?: string
 }
 
@@ -18,7 +18,12 @@ const BackdropItem = ({title, backdrop, overview, className}: BackdropItemProps)
     const useSmallBreakpoint = useMediaQuery(theme.breakpoints.up("sm"))
 
     return (
-        <Box className={`${className} ${styles.backdropCard}`}>
+        <Box
+            sx={{
+                width: {xs: "100%", sm: "80%", md: "55%"}
+            }}
+            className={`${className} ${styles.backdropCard}`}
+        >
             <Image
                 src={backdrop}
                 alt={title}
@@ -57,7 +62,7 @@ const BackdropItem = ({title, backdrop, overview, className}: BackdropItemProps)
                 <MultilineText
                     maxLines={useSmallBreakpoint ? 3 : 2}
                     width={1}
-                    variant="caption"
+                    variant="body2"
                     color="text.secondary"
                 >
                     {overview}

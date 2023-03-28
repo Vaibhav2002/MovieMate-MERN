@@ -6,6 +6,7 @@ import styles from "./RatingBadge.module.css"
 interface RatingBadgeProps {
     rating: number
     className?: string
+
 }
 
 const RatingBadge = ({rating, className}: RatingBadgeProps) => {
@@ -13,7 +14,7 @@ const RatingBadge = ({rating, className}: RatingBadgeProps) => {
     return (
         <Box
             sx={{
-                background: alpha(theme.palette.primary.light, 0.6),
+                background: alpha(theme.palette.primary.light, 0.8),
             }}
             padding={1}
             display="flex"

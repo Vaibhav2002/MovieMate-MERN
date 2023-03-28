@@ -21,6 +21,7 @@ const MovieItem = ({movie, className}: MovieItemProps) => {
                 alt={movie.title}
                 height={233}
                 width={175}
+                loading='lazy'
                 layout="responsive"
                 style={{objectFit: "cover"}}
             />

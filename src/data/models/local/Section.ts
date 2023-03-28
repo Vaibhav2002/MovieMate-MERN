@@ -1,4 +1,6 @@
-enum MovieSection {
+import Movie from "@/data/models/dto/movie/Movie";
+
+enum Section {
     Trending = "Trending movies",
     NowPlaying = "Now Playing",
     Upcoming = "Upcoming",
@@ -7,4 +9,6 @@ enum MovieSection {
     Popular = "Popular"
 }
 
-export default MovieSection
+export const allSection = Object.values(Section)
+
+export default Section

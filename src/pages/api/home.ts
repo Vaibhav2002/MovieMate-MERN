@@ -1,8 +1,8 @@
 import * as datasource from "@/data/datasource/MoviesDataSource";
-import {MovieSectionList} from "@/data/models/local/HomeData";
+import {MovieSection} from "@/uiDataHolders/MovieSection";
 import {NextApiRequest, NextApiResponse} from "next";
 import {isFulfilled} from "@/data/utils/PromiseFulfilled";
-import MovieSection from "@/data/models/local/MovieSection";
+import Section from "@/data/models/local/Section";
 import {addUrlToMovie} from "@/data/utils/ImageUrlHelper";
 
 
@@ -15,13 +15,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const popularMovies = datasource.fetchPopularMovies()
 
 
-    const homeSections = [
-        MovieSection.Trending,
-        MovieSection.NowPlaying,
-        MovieSection.Upcoming,
-        MovieSection.Latest,
-        MovieSection.TopRated,
-        MovieSection.Popular
+    const sections = [
+        Section.Trending,
+        Section.NowPlaying,
+        Section.Upcoming,
+        Section.Latest,
+        Section.TopRated,
+        Section.Popular
     ]
 
     const responses = await Promise.allSettled(
@@ -30,11 +30,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const movieList = responses.filter(isFulfilled)
         .map(response => response.value)
-        .map((result, index): MovieSectionList => ({
-            header: homeSections[index],
+        .map((result, index): MovieSection => ({
+            header: sections[index],
             movies: result.results ? result.results.map(addUrlToMovie) : []
         }))
-        .map(list => (list.header === MovieSection.Trending)
+        .map(list => (list.header === Section.Trending)
             ? {...list, movies: list.movies.slice(0, 8)}
             : list)
         .filter(data => data.movies.length > 0)

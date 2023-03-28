@@ -1,30 +1,31 @@
 import React from 'react';
-import Section from "@/data/models/local/ShowSection";
-import {ShowSectionList} from "@/data/models/local/HomeData";
-import {Box, Button, Stack, Typography} from "@mui/material";
-import ShowItem from "@/components/showItem/ShowItem";
+import Section from "@/data/models/local/Section";
+import {MovieSection} from "@/uiDataHolders/MovieSection";
+import {Box, Button, ImageList, ImageListItem, Stack, Typography} from "@mui/material";
+import MovieItem from "@/components/movieItem/MovieItem";
 import BackdropItem from "@/components/BackdropItem/BackdropItem";
-import {Carousel} from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import 'react-multi-carousel/lib/styles.css';
 
-interface ShowSectionProps {
-    section: ShowSectionList
+interface MovieSectionItemProps {
+    section: MovieSection
 }
 
 
-const ShowSection = ({section: {header, shows}}: ShowSectionProps) => {
+const MovieSectionItem = ({section: {header, movies}}: MovieSectionItemProps) => {
 
-    const isBackdropSection = header === Section.OnTheAir
+    const isBackdropSection = header === Section.Trending
 
-    const showComponents = shows.map(show => {
+    const movieComponents = movies.map(movie => {
         if (isBackdropSection)
             return <BackdropItem
-                key={show.id}
-                title={show.name}
-                backdrop={show.backdrop_path ?? ""}
-                overview={show.overview}
+                title={movie.title}
+                backdrop={movie.backdrop_path}
+                overview={movie.overview}
+                key={movie.id}
             />
         else
-            return <ShowItem key={show.id} show={show}/>
+            return <MovieItem key={movie.id} movie={movie}/>
     })
 
     return (
@@ -33,6 +34,7 @@ const ShowSection = ({section: {header, shows}}: ShowSectionProps) => {
                 display="flex"
                 justifyContent="space-between"
                 flexDirection="row"
+                paddingRight={2}
                 alignItems="center"
             >
                 <Typography variant="h5">{header}</Typography>
@@ -40,25 +42,23 @@ const ShowSection = ({section: {header, shows}}: ShowSectionProps) => {
             </Box>
 
             {/*<Carousel*/}
-            {/*    axis="horizontal"*/}
             {/*    emulateTouch={true}*/}
             {/*    centerMode={isBackdropSection}*/}
             {/*    autoPlay={isBackdropSection}*/}
             {/*    infiniteLoop={isBackdropSection}*/}
             {/*    centerSlidePercentage={60}*/}
-            {/*>*/}
-            {/*    {...showComponents}*/}
-            {/*</Carousel>*/}
+            {/*>{movieComponents}</Carousel>*/}
 
             <Stack
                 direction="row"
                 marginTop={2}
                 spacing={2}
                 style={{overflowX: "auto"}}
-            >{showComponents}</Stack>
+            >{movieComponents}</Stack>
+
         </Box>
     );
 };
 
 
-export default ShowSection;
+export default MovieSectionItem;
