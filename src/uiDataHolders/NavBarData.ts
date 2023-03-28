@@ -6,7 +6,7 @@ export interface NavBarSection {
 }
 
 export interface NavBarItem {
-    icon: React.ReactNode
+    icon?: React.ReactNode
 
     name: string
 

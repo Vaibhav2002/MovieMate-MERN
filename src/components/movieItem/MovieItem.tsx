@@ -1,5 +1,5 @@
 import React from 'react';
-import Movie from "@/data/models/dto/movie/Movie";
+import Movie from "@/data/models/dto/Movie";
 import {Box} from "@mui/system";
 import Image from "next/image";
 import RatingBadge from "@/components/ratingBadge/RatingBadge";

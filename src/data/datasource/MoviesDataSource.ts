@@ -1,4 +1,4 @@
-import {MoviesResponse} from "@/data/models/dto/movie/Movie";
+import {MoviesResponse} from "@/data/models/dto/Movie";
 import api from "@/data/datasource/TMDBApiClient";
 
 const fetchMovies = async (url:string):Promise<MoviesResponse> => {
