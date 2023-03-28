@@ -4,6 +4,8 @@ import {NextApiRequest, NextApiResponse} from "next";
 import {isFulfilled} from "@/data/utils/PromiseFulfilled";
 import Section from "@/data/models/local/Section";
 import {addUrlToMovie} from "@/data/utils/ImageUrlHelper";
+import {getGenres} from "@/data/datasource/CommonDataSource";
+import HomeData from "@/uiDataHolders/HomeData";
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -13,7 +15,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const latestMovies = datasource.fetchLatestMovies()
     const topRatedMovies = datasource.fetchTopRatedMovies()
     const popularMovies = datasource.fetchPopularMovies()
-
 
     const sections = [
         Section.Trending,
@@ -39,5 +40,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             : list)
         .filter(data => data.movies.length > 0)
 
-    return res.status(200).json(movieList)
+
+    const homeGenres = ['Action', 'Crime', 'Comedy', 'Thriller', 'Horror']
+    const genres = (await getGenres()).filter(genre => homeGenres.includes(genre.name))
+
+    const homeData:HomeData = {
+        genres: genres,
+        sections: movieList
+    }
+    return res.status(200).json(homeData)
 }

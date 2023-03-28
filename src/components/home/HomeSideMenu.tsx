@@ -20,7 +20,7 @@ const HomeSideMenu = ({data}: HomeNavBarProps) => {
     const navButtons = (items: NavBarItem[]) => (items.map(item =>
         <ListItem key={item.name} disablePadding>
             <ListItemButton component={Link} href={item.href}>
-                <ListItemIcon>{item.icon}</ListItemIcon>
+                {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
                 <ListItemText primary={item.name}/>
             </ListItemButton>
         </ListItem>

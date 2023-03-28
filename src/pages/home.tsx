@@ -4,95 +4,81 @@ import axios from "axios";
 import {Box, Stack} from "@mui/material";
 import React from "react";
 import {getBaseUrl} from "@/data/utils/ServerSideBaseUrl";
-import NavBarData from "@/uiDataHolders/NavBarData";
-import {
-    ExploreRounded,
-    HomeRounded,
-    LocalFireDepartmentRounded,
-    SportsRounded,
-    StarRounded,
-    TheaterComedyRounded,
-    WhatshotRounded
-} from "@mui/icons-material";
+import NavBarData, {NavBarItem} from "@/uiDataHolders/NavBarData";
+import {ExploreRounded, HomeRounded, StarRounded, WhatshotRounded} from "@mui/icons-material";
 import HomeSideMenu from "@/components/home/HomeSideMenu";
 import MovieSectionItem from "@/components/movieSection/MovieSectionItem";
 import MovieMateAppBar from "@/components/MovieMateAppBar";
 import Routes, {getGenreRoute} from "@/Routes";
-import Genre, {genreId} from "@/data/models/local/Genre";
+import Genre from "@/data/models/dto/Genre";
+import HomeData from "@/uiDataHolders/HomeData";
 
 export const getStaticProps: GetStaticProps<HomeScreenProps> = async () => {
-    const movieList = (await axios.get<MovieSection[]>(`${getBaseUrl()}/api/home`)).data
+    const homeData = (await axios.get<HomeData>(`${getBaseUrl()}/api/home`)).data
 
     return {
-        props: {movies: movieList},
+        props: {
+            movies: homeData.sections,
+            genres: homeData.genres
+        },
         revalidate: 60 * 60 // 1 hour
     }
 }
 
-const navBarData: NavBarData = {
-    sections: [
-        {
-            title: 'Menu',
-            items: [
-                {
-                    name: 'Home',
-                    icon: <HomeRounded/>,
-                    href: '/home'
-                },
-                {
-                    //TODO: Add Discover Page
-                    name: 'Discover',
-                    icon: <ExploreRounded/>,
-                    href: Routes.DISCOVER
-                }
-            ]
-        },
-        {
-            title: 'Genres',
-            items: [
-                {
-                    name: Genre.Action,
-                    icon: <LocalFireDepartmentRounded/>,
-                    href: getGenreRoute(genreId(Genre.Action))
-                },
-                {
-                    name: Genre.Sports,
-                    icon: <SportsRounded/>,
-                    href: getGenreRoute(genreId(Genre.Sports))
-                },
-                {
-                    name: Genre.Comedy,
-                    icon: <TheaterComedyRounded/>,
-                    href: getGenreRoute(genreId(Genre.Comedy))
-                },
-            ]
-        },
-        {
-            title: 'Library',
-            items: [
-                {
-                    //TODO: Nav to Top Rated Movies Category Page
-                    name: 'Top Rated',
-                    icon: <StarRounded/>,
-                    href: '/home'
-                },
-                {
-                    //TODO: Nav to Popular Movies Category Page
-                    name: 'Popular',
-                    icon: <WhatshotRounded/>,
-                    href: '/home'
-                }
-            ]
-        }
-    ]
-
-}
-
 interface HomeScreenProps {
     movies: MovieSection[]
+    genres: Genre[]
 }
 
-const HomeScreen = ({movies}: HomeScreenProps) => {
+const HomeScreen = ({movies, genres}: HomeScreenProps) => {
+
+    const navBarData: NavBarData = {
+        sections: [
+            {
+                title: 'Menu',
+                items: [
+                    {
+                        name: 'Home',
+                        icon: <HomeRounded/>,
+                        href: '/home'
+                    },
+                    {
+                        //TODO: Add Discover Page
+                        name: 'Discover',
+                        icon: <ExploreRounded/>,
+                        href: Routes.DISCOVER
+                    }
+                ]
+            },
+            {
+                title: 'Library',
+                items: [
+                    {
+                        //TODO: Nav to Top Rated Movies Category Page
+                        name: 'Top Rated',
+                        icon: <StarRounded/>,
+                        href: '/home'
+                    },
+                    {
+                        //TODO: Nav to Popular Movies Category Page
+                        name: 'Popular',
+                        icon: <WhatshotRounded/>,
+                        href: '/home'
+                    }
+                ]
+            },
+            {
+                title: 'Genres',
+                items: genres.map<NavBarItem>(genre => (
+                    {
+                        name: genre.name,
+                        href: getGenreRoute(genre.id)
+                    }
+                ))
+            }
+        ]
+    }
+
     return (
         <main>
             <MovieMateAppBar/>
