@@ -1,21 +1,19 @@
 import Movie from "@/data/models/dto/Movie";
-import {Show} from "@/data/models/dto/Show";
 
 const imageBaseUrl = "https://image.tmdb.org/t/p"
-const posterSize = "w500"
+const posterSize = "w780"
 const backdropSize = "w780"
+const logoSize="w500"
 
-const getPosterUrl = (file: string) => `${imageBaseUrl}/${posterSize}${file}`
-const getBackdropUrl = (file: string) => `${imageBaseUrl}/${backdropSize}${file}`
+export const getPosterUrl = (file: string) => `${imageBaseUrl}/${posterSize}${file}`
+export const getBackdropUrl = (file: string) => `${imageBaseUrl}/${backdropSize}${file}`
+
+export const getLogoUrl = (file: string) => `${imageBaseUrl}/${logoSize}${file}`
+
+export const backgroundBackdropUrl = (file: string) => `${imageBaseUrl}/original${file}`
 
 export const addUrlToMovie = (movie: Movie) => ({
     ...movie,
     poster_path: getPosterUrl(movie.poster_path),
     backdrop_path: getBackdropUrl(movie.backdrop_path)
-})
-
-export const addUrlToShow = (show: Show) => ({
-    ...show,
-    poster_path: getPosterUrl(show.poster_path),
-    backdrop_path: show.backdrop_path ? getBackdropUrl(show.backdrop_path) : null
 })
