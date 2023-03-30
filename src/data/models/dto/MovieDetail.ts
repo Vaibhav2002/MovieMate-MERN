@@ -9,7 +9,7 @@ export interface MovieDetail {
     id: number;
     overview: string;
     popularity: number;
-    poster_path: null;
+    poster_path: string;
     release_date: Date;
     runtime: number;
     status: string;
