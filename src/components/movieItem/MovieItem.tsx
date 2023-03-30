@@ -8,13 +8,15 @@ import Link from "next/link";
 import {getMovieRoute} from "@/Routes";
 
 interface MovieItemProps {
+    width?: string
     movie: Movie
     className?: string
 }
 
-const MovieItem = ({movie, className}: MovieItemProps) => {
+const MovieItem = ({width, movie, className}: MovieItemProps) => {
     return (
         <Box
+            width={width ?? "175px"}
             className={`${componentStyles.posterCard} ${className}`}
             position="relative"
             component={Link}

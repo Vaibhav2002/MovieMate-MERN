@@ -1,18 +1,22 @@
 import React from 'react';
 import Section from "@/data/models/local/Section";
 import {MovieSection} from "@/uiDataHolders/MovieSection";
-import {Box, Button, Stack, Typography} from "@mui/material";
+import {Box, Button, Stack, Typography, TypographyPropsVariantOverrides} from "@mui/material";
 import MovieItem from "@/components/movieItem/MovieItem";
 import BackdropItem from "@/components/BackdropItem/BackdropItem";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import 'react-multi-carousel/lib/styles.css';
+import {OverridableStringUnion} from "@mui/types";
+import {Variant} from "@mui/material/styles/createTypography";
 
 interface MovieSectionItemProps {
+    headerVariant?: OverridableStringUnion<"inherit" | Variant, TypographyPropsVariantOverrides>
+    itemWidth?:string
     section: MovieSection
 }
 
 
-const MovieSectionItem = ({section: {header, movies}}: MovieSectionItemProps) => {
+const MovieSectionItem = ({headerVariant, itemWidth, section: {header, movies}}: MovieSectionItemProps) => {
 
     const isBackdropSection = header === Section.Trending
 
@@ -20,7 +24,7 @@ const MovieSectionItem = ({section: {header, movies}}: MovieSectionItemProps) =>
         if (isBackdropSection)
             return <BackdropItem key={movie.id} movie={movie}/>
         else
-            return <MovieItem key={movie.id} movie={movie}/>
+            return <MovieItem key={movie.id} width={itemWidth} movie={movie}/>
     })
 
     return (
@@ -32,7 +36,7 @@ const MovieSectionItem = ({section: {header, movies}}: MovieSectionItemProps) =>
                 paddingRight={2}
                 alignItems="center"
             >
-                <Typography variant="h5">{header}</Typography>
+                <Typography variant={headerVariant ?? "h5"}>{header}</Typography>
                 <Button variant="text">See More</Button>
             </Box>
 
