@@ -6,7 +6,12 @@ enum Section {
     Upcoming = "Upcoming",
     Latest = "Latest",
     TopRated = "Top Rated",
-    Popular = "Popular"
+    Popular = "Popular",
+
+    Recommendations = "Recommendations",
+
+    Similar = "Similar Movies",
+
 }
 
 export const allSection = Object.values(Section)
