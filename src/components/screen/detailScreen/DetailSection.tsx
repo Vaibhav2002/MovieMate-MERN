@@ -28,13 +28,15 @@ const DetailSection = ({detail, watchProviders, similarMovies, recommendations}:
 
 
     return (
-        <Stack direction="column" height="100%" spacing={4} paddingBottom={4}>
+        <Stack
+            direction="column"
+            height="100%"
+            spacing={4}
+        >
             <Box
                 display="flex"
                 flex={1}
-                sx={{
-                    flexDirection: {xs: "column", sm: "row"},
-                }}
+                sx={{flexDirection: {xs: "column", sm: "row"},}}
                 alignItems="center"
                 gap={6}
             >
@@ -52,14 +54,14 @@ const DetailSection = ({detail, watchProviders, similarMovies, recommendations}:
                     />
                 </Box>
                 <Stack direction="column" sx={{overflowX: "hidden"}} flex={1} spacing={2}>
-                    <MultilineText
-                        maxLines={2}
-                        variant={isBelowSm ? "h5" : "h2"}
-                    >
+                    <MultilineText maxLines={2} variant={isBelowSm ? "h5" : "h2"}>
                         {detail.title}
                     </MultilineText>
+
                     <Alert severity="info" icon={false}>{detail.tagline}</Alert>
+
                     <MultilineText maxLines={5} variant="subtitle1">{detail.overview}</MultilineText>
+
                     {watchProviders && watchProviders.length > 0 && <WatchOnSection watchProviders={watchProviders}/>}
                 </Stack>
             </Box>

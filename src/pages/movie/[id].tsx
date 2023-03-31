@@ -44,19 +44,16 @@ const DetailScreen = (
     console.log(backdrops?.at(0)?.height + " " + backdrops?.at(0)?.width)
     return (
         <main>
-            <Box position="relative" height="100vh">
+            <Box position="relative">
                 {backdrops && <BackdropBackground title={detail.title} backdrops={backdrops}/>}
 
                 <Box
-                    width={0.8}
-                    height={1}
-                    marginTop="10%"
-                    marginBottom="20%"
+                    width="100%"
+                    padding="10%"
                     sx={{
                         position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
+                        top: "0",
+                        left: "0%",
                     }}
                 >
                     <DetailSection
