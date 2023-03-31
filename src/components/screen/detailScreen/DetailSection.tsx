@@ -50,17 +50,22 @@ const DetailSection = ({detail, watchProviders, videos, similarMovies, recommend
             >
                 <Box
                     sx={{width: {xs: "70%", sm: "50%", md: "30%"}}}
-                    className={componentStyles.posterCard}>
-                    <Image
-                        src={detail.poster_path}
-                        alt={detail.title}
-                        height={1000}
-                        width={750}
-                        loading='lazy'
-                        layout="responsive"
-                        style={{objectFit: "cover"}}
-                    />
+                    className={componentStyles.posterCard}
+                >
+                    <Tilt>
+                        <Image
+                            src={detail.poster_path}
+                            alt={detail.title}
+                            height={1000}
+                            width={750}
+                            loading='lazy'
+                            layout="responsive"
+                            style={{objectFit: "cover"}}
+                        />
+                    </Tilt>
                 </Box>
+
+
                 <Stack direction="column" sx={{overflowX: "hidden"}} flex={1} spacing={2}>
                     <MultilineText maxLines={2} variant={isBelowSm ? "h5" : "h2"}>
                         {detail.title}
