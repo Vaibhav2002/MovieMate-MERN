@@ -12,11 +12,13 @@ import {Variant} from "@mui/material/styles/createTypography";
 interface MovieSectionItemProps {
     headerVariant?: OverridableStringUnion<"inherit" | Variant, TypographyPropsVariantOverrides>
     itemWidth?:string
+
+    canSeeMore?:Boolean
     section: MovieSection
 }
 
 
-const MovieSectionItem = ({headerVariant, itemWidth, section: {header, movies}}: MovieSectionItemProps) => {
+const MovieSectionItem = ({headerVariant, itemWidth, canSeeMore, section: {header, movies}}: MovieSectionItemProps) => {
 
     const isBackdropSection = header === Section.Trending
 
@@ -37,16 +39,8 @@ const MovieSectionItem = ({headerVariant, itemWidth, section: {header, movies}}:
                 alignItems="center"
             >
                 <Typography variant={headerVariant ?? "h5"}>{header}</Typography>
-                <Button variant="text">See More</Button>
+                {canSeeMore && <Button variant="text">See More</Button>}
             </Box>
-
-            {/*<Carousel*/}
-            {/*    emulateTouch={true}*/}
-            {/*    centerMode={isBackdropSection}*/}
-            {/*    autoPlay={isBackdropSection}*/}
-            {/*    infiniteLoop={isBackdropSection}*/}
-            {/*    centerSlidePercentage={60}*/}
-            {/*>{movieComponents}</Carousel>*/}
 
             <Stack
                 direction="row"

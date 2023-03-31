@@ -22,7 +22,7 @@ const BackdropItem = ({movie, className}: BackdropItemProps) => {
     return (
         <Box
             sx={{
-                width: {xs: "100%", sm: "80%", md: "55%"}
+                width: {xs: "100%", sm: "80%", md: "65%"}
             }}
             className={`${className} ${styles.backdropCard}`}
             component={Link}

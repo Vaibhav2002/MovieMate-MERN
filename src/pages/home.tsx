@@ -6,7 +6,7 @@ import React from "react";
 import {getBaseUrl} from "@/data/utils/ServerSideBaseUrl";
 import NavBarData, {NavBarItem} from "@/uiDataHolders/NavBarData";
 import {ExploreRounded, HomeRounded, StarRounded, WhatshotRounded} from "@mui/icons-material";
-import HomeSideMenu from "@/components/home/HomeSideMenu";
+import HomeSideMenu from "@/components/screen/home/HomeSideMenu";
 import MovieSectionItem from "@/components/movieSection/MovieSectionItem";
 import MovieMateAppBar from "@/components/MovieMateAppBar";
 import Routes, {getGenreRoute} from "@/Routes";
@@ -88,17 +88,18 @@ const HomeScreen = ({movies, genres}: HomeScreenProps) => {
                 alignItems="flex-start"
             >
 
-                <Box display="sticky" zIndex={5}><
-                    HomeSideMenu data={navBarData}/>
+                <Box sx={{display: { xs:"none", md:"fixed" }}}>
+                    <HomeSideMenu data={navBarData}/>
                 </Box>
 
                 <Box flex="1" sx={{overflowX: "hidden"}}>
                     <Stack
                         direction="column"
+                        paddingLeft={2}
                         spacing={7}
                         paddingY={2}
                     >
-                        {movies.map(section => <MovieSectionItem key={section.header} section={section}/>)}
+                        {movies.map(section => <MovieSectionItem key={section.header} section={section} canSeeMore={true}/>)}
                     </Stack>
                 </Box>
             </Box>

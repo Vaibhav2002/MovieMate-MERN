@@ -53,11 +53,12 @@ const DetailScreen = (
                     sx={{
                         position: "absolute",
                         top: "0",
-                        left: "0%",
+                        left: "0",
                     }}
                 >
                     <DetailSection
                         detail={detail}
+                        videos={videos}
                         watchProviders={watchProviders}
                         similarMovies={similarMovies}
                         recommendations={recommendations}/>
