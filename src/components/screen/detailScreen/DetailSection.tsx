@@ -10,29 +10,37 @@ import WatchOnSection from "@/components/screen/detailScreen/WatchOnSection";
 import MovieSectionItem from "@/components/movieSection/MovieSectionItem";
 import {MovieSection} from "@/uiDataHolders/MovieSection";
 import Section from "@/data/models/local/Section";
+import Video from "@/data/models/dto/Video";
+import VideoSection from "@/components/screen/detailScreen/VideoSection";
+import Tilt from 'react-parallax-tilt';
 
 interface DetailSectionProps {
 
     detail: MovieDetail;
     watchProviders: WatchProvider[] | null;
+
+    videos: Video[] | null
+
     similarMovies: Movie[] | null;
     recommendations: Movie[] | null;
 }
 
-const DetailSection = ({detail, watchProviders, similarMovies, recommendations}: DetailSectionProps) => {
+const DetailSection = ({detail, watchProviders, videos, similarMovies, recommendations}: DetailSectionProps) => {
 
     const theme = useTheme()
     const isBelowSm = useMediaQuery(theme.breakpoints.down('sm'));
 
     const notEmptyOrNull = (list: any[] | null) => list && list.length > 0
 
+    const movieSection = (section: Section, movies: Movie[]) =>
+        <MovieSectionItem
+            headerVariant="h6"
+            itemWidth="120px"
+            canSeeMore={false}
+            section={{header: section, movies: movies} as MovieSection}/>
 
     return (
-        <Stack
-            direction="column"
-            height="100%"
-            spacing={4}
-        >
+        <Stack direction="column" height="100%" spacing={4}>
             <Box
                 display="flex"
                 flex={1}
@@ -66,23 +74,11 @@ const DetailSection = ({detail, watchProviders, similarMovies, recommendations}:
                 </Stack>
             </Box>
 
+            {notEmptyOrNull(videos) && <VideoSection title={"Trailers and More"} videos={videos!}/>}
 
-            {/*TODO: Add Video Section*/}
-            {notEmptyOrNull(recommendations) && <MovieSectionItem
-                headerVariant="h6"
-                itemWidth="120px"
-                section={{
-                    header: Section.Recommendations,
-                    movies: recommendations
-                } as MovieSection}/>}
+            {notEmptyOrNull(recommendations) && movieSection(Section.Recommendations, recommendations!)}
 
-            {notEmptyOrNull(similarMovies) && <MovieSectionItem
-                headerVariant="h6"
-                itemWidth="120px"
-                section={{
-                    header: Section.Similar,
-                    movies: similarMovies
-                } as MovieSection}/>}
+            {notEmptyOrNull(similarMovies) && movieSection(Section.Similar, similarMovies!)}
 
         </Stack>
     );
