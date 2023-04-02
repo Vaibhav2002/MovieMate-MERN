@@ -10,7 +10,7 @@ export interface SectionDataResponse {
     isLastPage: boolean
 }
 
-function getResponsePromise(section: Section, page: string): Promise<MoviesResponse> {
+function getResponsePromise(section: Section, page: number): Promise<MoviesResponse> {
     switch (section) {
         case Section.Trending:
             return dataSource.fetchTrendingMovies(page)
@@ -34,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     assertIsDefined(slug)
     assertIsDefined(page)
     const section = getSectionFromSlug(slug as string)
-    const response = await getResponsePromise(section, page as string)
+    const response = await getResponsePromise(section, parseFloat(page as string))
     const isLastPage = response.page === response.total_pages
     const result: SectionDataResponse = {
         movies: response.results,

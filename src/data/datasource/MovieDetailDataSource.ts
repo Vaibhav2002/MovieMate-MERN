@@ -9,7 +9,7 @@ import {
     backgroundBackdropUrl,
     getBackdropUrl,
     getLogoUrl,
-    getPosterUrl, getPosterUrlLarge
+    getPosterUrlLarge
 } from "@/data/utils/ImageUrlHelper";
 
 const getMovieInfo = async <T>(id: number, url: string): Promise<T> => {
