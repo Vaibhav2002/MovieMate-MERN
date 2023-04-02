@@ -40,7 +40,7 @@ const HomeScreen = ({movies, genres}: HomeScreenProps) => {
                     {
                         name: 'Home',
                         icon: <HomeRounded/>,
-                        href: '/home'
+                        href: Routes.HOME
                     },
                     {
                         //TODO: Add Discover Page
@@ -64,7 +64,7 @@ const HomeScreen = ({movies, genres}: HomeScreenProps) => {
                 items: genres.map<NavBarItem>(genre => (
                     {
                         name: genre.name,
-                        href: getGenreRoute(genre.id)
+                        href: getGenreRoute(genre)
                     }
                 ))
             }
