@@ -6,10 +6,10 @@ import React from "react";
 import {getBaseUrl} from "@/data/utils/ServerSideBaseUrl";
 import NavBarData, {NavBarItem} from "@/uiDataHolders/NavBarData";
 import {ExploreRounded, HomeRounded, StarRounded, WhatshotRounded} from "@mui/icons-material";
-import HomeSideMenu from "@/components/screen/home/HomeSideMenu";
-import MovieSectionItem from "@/components/movieSection/MovieSectionItem";
+import SideMenu from "@/components/SideMenu";
+import MovieSectionItem from "@/components/MovieSectionItem";
 import MovieMateAppBar from "@/components/MovieMateAppBar";
-import Routes, {getGenreRoute} from "@/Routes";
+import Routes, {getGenreRoute, getSectionRoute} from "@/Routes";
 import Genre from "@/data/models/dto/Genre";
 import HomeData from "@/uiDataHolders/HomeData";
 
@@ -31,7 +31,7 @@ interface HomeScreenProps {
 }
 
 const HomeScreen = ({movies, genres}: HomeScreenProps) => {
-
+    const sections = movies.map(section => section.header)
     const navBarData: NavBarData = {
         sections: [
             {
@@ -52,20 +52,12 @@ const HomeScreen = ({movies, genres}: HomeScreenProps) => {
             },
             {
                 title: 'Library',
-                items: [
+                items: sections.map<NavBarItem>(section => (
                     {
-                        //TODO: Nav to Top Rated Movies Category Page
-                        name: 'Top Rated',
-                        icon: <StarRounded/>,
-                        href: '/home'
-                    },
-                    {
-                        //TODO: Nav to Popular Movies Category Page
-                        name: 'Popular',
-                        icon: <WhatshotRounded/>,
-                        href: '/home'
+                        name: section,
+                        href: getSectionRoute(section)
                     }
-                ]
+                ))
             },
             {
                 title: 'Genres',
@@ -89,7 +81,7 @@ const HomeScreen = ({movies, genres}: HomeScreenProps) => {
             >
 
                 <Box sx={{display: { xs:"none", md:"fixed" }}}>
-                    <HomeSideMenu data={navBarData}/>
+                    <SideMenu data={navBarData}/>
                 </Box>
 
                 <Box flex="1" sx={{overflowX: "hidden"}}>
