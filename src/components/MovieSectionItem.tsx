@@ -56,6 +56,7 @@ const MovieSectionItem = ({headerVariant, itemWidth, canSeeMore, section: {heade
                 direction="row"
                 marginTop={2}
                 spacing={2}
+                paddingRight={2}
                 style={{overflowX: "auto"}}
             >{movieComponents}</Stack>
 
