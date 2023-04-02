@@ -3,7 +3,7 @@ import {assertIsDefined} from "@/data/utils/Helpers";
 import {getSectionFromSlug} from "@/data/utils/SectionUtils";
 import axios from "axios";
 import {SectionDataResponse} from "@/pages/api/movies/[slug]";
-import {baseUrl} from "@/data/utils/ServerSideBaseUrl";
+import {BASE_URL} from "@/data/utils/Constants";
 import Movie from "@/data/models/dto/Movie";
 import Section, {nonMovieSpecificSections} from "@/data/models/local/Section";
 import {Box, Typography} from "@mui/material";
@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps<DiscoverSectionScreenProps> 
     const section = getSectionFromSlug(slug)
     const page = context.query.page as string
 
-    const response = await axios.get<SectionDataResponse>(`${baseUrl}/api/movies/${slug}?page=${page}`)
+    const response = await axios.get<SectionDataResponse>(`${BASE_URL}/api/movies/${slug}?page=${page}`)
 
     return {
         props: {
