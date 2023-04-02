@@ -10,7 +10,7 @@ export interface MovieDetail {
     overview: string;
     popularity: number;
     poster_path: string;
-    release_date: Date;
+    release_date: string;
     runtime: number;
     status: string;
     tagline: string;

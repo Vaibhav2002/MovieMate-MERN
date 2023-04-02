@@ -2,10 +2,12 @@ import React from 'react';
 import Movie from "@/data/models/dto/Movie";
 import {Box} from "@mui/system";
 import Image from "next/image";
-import RatingBadge from "@/components/ratingBadge/RatingBadge";
 import componentStyles from "@/styles/components/components.module.css";
 import Link from "next/link";
 import {getMovieRoute} from "@/Routes";
+import {roundTo2Decimals} from "@/data/utils/Helpers";
+import {StarRounded} from "@mui/icons-material";
+import RectChip from "@/components/styled/RectChip";
 
 interface MovieItemProps {
     width?: string
@@ -37,7 +39,12 @@ const MovieItem = ({width, movie, className}: MovieItemProps) => {
                     top: 8,
                     right: 8,
                 }}>
-                <RatingBadge rating={movie.vote_average}/>
+                <RectChip
+                    label={roundTo2Decimals(movie.vote_average)}
+                    color="secondary"
+                    size="small"
+                    icon={<StarRounded/>}
+                />
             </Box>
 
         </Box>

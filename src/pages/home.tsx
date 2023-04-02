@@ -35,22 +35,6 @@ const HomeScreen = ({movies, genres}: HomeScreenProps) => {
     const navBarData: NavBarData = {
         sections: [
             {
-                title: 'Menu',
-                items: [
-                    {
-                        name: 'Home',
-                        icon: <HomeRounded/>,
-                        href: Routes.HOME
-                    },
-                    {
-                        //TODO: Add Discover Page
-                        name: 'Discover',
-                        icon: <ExploreRounded/>,
-                        href: Routes.DISCOVER
-                    }
-                ]
-            },
-            {
                 title: 'Library',
                 items: sections.map<NavBarItem>(section => (
                     {

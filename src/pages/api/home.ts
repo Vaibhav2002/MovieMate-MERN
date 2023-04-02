@@ -41,8 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .filter(data => data.movies.length > 0)
 
 
-    const homeGenres = ['Action', 'Crime', 'Comedy', 'Thriller', 'Horror']
-    const genres = (await getGenres()).filter(genre => homeGenres.includes(genre.name))
+    const genres = (await getGenres()).slice(0, 10)
 
     const homeData:HomeData = {
         genres: genres,
