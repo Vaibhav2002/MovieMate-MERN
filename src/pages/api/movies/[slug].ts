@@ -16,8 +16,6 @@ function getResponsePromise(section: Section, page: number): Promise<MoviesRespo
             return dataSource.fetchTrendingMovies(page)
         case Section.Popular:
             return dataSource.fetchPopularMovies(page)
-        case Section.Latest:
-            return dataSource.fetchLatestMovies(page)
         case Section.TopRated:
             return dataSource.fetchTopRatedMovies(page)
         case Section.NowPlaying:
@@ -38,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const isLastPage = response.page === response.total_pages
     const result: SectionDataResponse = {
         movies: response.results,
-        isLastPage: isLastPage
+        isLastPage: isLastPage,
     }
     return res.status(200).json(result)
 }

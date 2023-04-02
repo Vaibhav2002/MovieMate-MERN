@@ -3,7 +3,6 @@ import {MovieSection} from "@/uiDataHolders/MovieSection";
 import {NextApiRequest, NextApiResponse} from "next";
 import {isFulfilled} from "@/data/utils/PromiseFulfilled";
 import Section from "@/data/models/local/Section";
-import {addUrlToMovie} from "@/data/utils/ImageUrlHelper";
 import {getGenres} from "@/data/datasource/CommonDataSource";
 import HomeData from "@/uiDataHolders/HomeData";
 
@@ -12,7 +11,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const trendingMovies = datasource.fetchTrendingMovies()
     const nowPlayingMovies = datasource.fetchNowPlayingMovies()
     const upcomingMovies = datasource.fetchUpcomingMovies()
-    const latestMovies = datasource.fetchLatestMovies()
     const topRatedMovies = datasource.fetchTopRatedMovies()
     const popularMovies = datasource.fetchPopularMovies()
 
@@ -20,13 +18,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         Section.Trending,
         Section.NowPlaying,
         Section.Upcoming,
-        Section.Latest,
         Section.TopRated,
         Section.Popular
     ]
 
     const responses = await Promise.allSettled(
-        [trendingMovies, nowPlayingMovies, upcomingMovies, latestMovies, topRatedMovies, popularMovies]
+        [trendingMovies, nowPlayingMovies, upcomingMovies, topRatedMovies, popularMovies]
     )
 
     const movieList = responses.filter(isFulfilled)

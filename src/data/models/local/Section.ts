@@ -4,7 +4,6 @@ enum Section {
     Trending = "Trending Movies",
     NowPlaying = "Now Playing",
     Upcoming = "Upcoming",
-    Latest = "Latest",
     TopRated = "Top Rated",
     Popular = "Popular",
 
@@ -18,7 +17,6 @@ export const nonMovieSpecificSections = [
     Section.Trending,
     Section.NowPlaying,
     Section.Upcoming,
-    Section.Latest,
     Section.TopRated,
     Section.Popular,
 ]

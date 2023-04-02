@@ -1,10 +1,11 @@
 import {MoviesResponse} from "@/data/models/dto/Movie";
 import api from "@/data/datasource/TMDBApiClient";
 import {addUrlToMovie} from "@/data/utils/ImageUrlHelper";
+import {AxiosRequestConfig} from "axios";
 
 const fetchMovies = async (url: string, page: number): Promise<MoviesResponse> => {
     const response = await api.get<MoviesResponse>(url, {
-        params: {page: page}
+        params: { page: page }
     })
     return response.data
 }
@@ -18,9 +19,6 @@ const fetchTrendingMovies = (page: number = 1): Promise<MoviesResponse> => fetch
     .then(addUrlToMovies)
 
 const fetchPopularMovies = (page: number = 1): Promise<MoviesResponse> => fetchMovies('/movie/popular', page)
-    .then(addUrlToMovies)
-
-const fetchLatestMovies = (page: number = 1): Promise<MoviesResponse> => fetchMovies("/movie/latest", page)
     .then(addUrlToMovies)
 
 const fetchTopRatedMovies = (page: number = 1): Promise<MoviesResponse> => fetchMovies("movie/top_rated", page)
@@ -38,7 +36,6 @@ const fetchMoviesByGenre = (id: number, page: number = 1): Promise<MoviesRespons
 export {
     fetchTrendingMovies,
     fetchPopularMovies,
-    fetchLatestMovies,
     fetchTopRatedMovies,
     fetchNowPlayingMovies,
     fetchUpcomingMovies,
