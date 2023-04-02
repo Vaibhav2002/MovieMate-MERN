@@ -3,7 +3,7 @@ import {GetStaticProps} from "next";
 import axios from "axios";
 import {Box, Stack} from "@mui/material";
 import React from "react";
-import {getBaseUrl} from "@/data/utils/ServerSideBaseUrl";
+import {baseUrl} from "@/data/utils/ServerSideBaseUrl";
 import NavBarData, {NavBarItem} from "@/uiDataHolders/NavBarData";
 import {ExploreRounded, HomeRounded, StarRounded, WhatshotRounded} from "@mui/icons-material";
 import SideMenu from "@/components/SideMenu";
@@ -14,7 +14,7 @@ import Genre from "@/data/models/dto/Genre";
 import HomeData from "@/uiDataHolders/HomeData";
 
 export const getStaticProps: GetStaticProps<HomeScreenProps> = async () => {
-    const homeData = (await axios.get<HomeData>(`${getBaseUrl()}/api/home`)).data
+    const homeData = (await axios.get<HomeData>(`${baseUrl}/api/home`)).data
 
     return {
         props: {

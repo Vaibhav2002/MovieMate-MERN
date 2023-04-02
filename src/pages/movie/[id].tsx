@@ -3,7 +3,7 @@ import Video from "@/data/models/dto/Video";
 import Movie from "@/data/models/dto/Movie";
 import {WatchProvider} from "@/data/models/dto/WatchProvider";
 import {GetServerSideProps} from "next";
-import {getBaseUrl} from "@/data/utils/ServerSideBaseUrl";
+import {baseUrl} from "@/data/utils/ServerSideBaseUrl";
 import {DetailScreenData} from "@/uiDataHolders/DetailScreenData";
 import axios from "axios";
 import {Image as ImageDto} from "@/data/models/dto/Image";
@@ -19,7 +19,7 @@ import {MovieSection} from "@/uiDataHolders/MovieSection";
 
 export const getServerSideProps: GetServerSideProps<DetailScreenProps> = async ({params}) => {
     const id = params!.id
-    const data = (await axios.get<DetailScreenData>(`${getBaseUrl()}/api/detail?id=${id}`)).data
+    const data = (await axios.get<DetailScreenData>(`${baseUrl}/api/detail?id=${id}`)).data
     return {
         props: {
             detail: data.detail,
