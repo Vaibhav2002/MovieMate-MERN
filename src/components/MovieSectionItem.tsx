@@ -8,6 +8,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import 'react-multi-carousel/lib/styles.css';
 import {OverridableStringUnion} from "@mui/types";
 import {Variant} from "@mui/material/styles/createTypography";
+import Link from "next/link";
+import {getSectionRoute} from "@/Routes";
 
 interface MovieSectionItemProps {
     headerVariant?: OverridableStringUnion<"inherit" | Variant, TypographyPropsVariantOverrides>
@@ -39,7 +41,15 @@ const MovieSectionItem = ({headerVariant, itemWidth, canSeeMore, section: {heade
                 alignItems="center"
             >
                 <Typography variant={headerVariant ?? "h5"}>{header}</Typography>
-                {canSeeMore && <Button variant="text">See More</Button>}
+                {canSeeMore &&
+                    <Button
+                        variant="text"
+                        component={Link}
+                        href={getSectionRoute(header)}
+                    >
+                        See More
+                    </Button>
+                }
             </Box>
 
             <Stack
