@@ -9,8 +9,13 @@ import axios from "axios";
 import {Image as ImageDto} from "@/data/models/dto/Image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import BackdropBackground from "@/components/screens/detailScreen/BackdropBackground";
-import {Box} from "@mui/material";
+import {Box, Stack} from "@mui/material";
 import DetailSection from "@/components/screens/detailScreen/DetailSection";
+import VideoSection from "@/components/screens/detailScreen/VideoSection";
+import Section from "@/data/models/local/Section";
+import React from "react";
+import MovieSectionItem from "@/components/MovieSectionItem";
+import {MovieSection} from "@/uiDataHolders/MovieSection";
 
 export const getServerSideProps: GetServerSideProps<DetailScreenProps> = async ({params}) => {
     const id = params!.id
@@ -41,7 +46,15 @@ const DetailScreen = (
 ) => {
     const isBackdropsNotNullOrEmpty = backdrops && backdrops.length > 0
 
-    console.log(backdrops?.at(0)?.height + " " + backdrops?.at(0)?.width)
+    const notEmptyOrNull = (list: any[] | null) => list && list.length > 0
+
+    const movieSection = (section: Section, movies: Movie[]) =>
+        <MovieSectionItem
+            headerVariant="h6"
+            itemWidth="120px"
+            canSeeMore={false}
+            section={{header: section, movies: movies} as MovieSection}/>
+
     return (
         <main>
             <Box position="relative">
@@ -54,16 +67,23 @@ const DetailScreen = (
                         position: "absolute",
                         top: "0",
                         left: "0",
-                    }}
-                >
-                    <DetailSection
-                        detail={detail}
-                        videos={videos}
-                        watchProviders={watchProviders}
-                        similarMovies={similarMovies}
-                        recommendations={recommendations}/>
+                    }}>
+
+                    <Stack direction="column" height="100%" spacing={4}>
+
+                        <DetailSection detail={detail} watchProviders={watchProviders}/>
+
+                        {notEmptyOrNull(videos) && <VideoSection title={"Trailers and More"} videos={videos!}/>}
+
+                        {notEmptyOrNull(recommendations) && movieSection(Section.Recommendations, recommendations!)}
+
+                        {notEmptyOrNull(similarMovies) && movieSection(Section.Similar, similarMovies!)}
+
+                    </Stack>
 
                 </Box>
+
+
 
             </Box>
         </main>
