@@ -7,6 +7,7 @@ import componentStyles from "@/styles/components/components.module.css";
 import MultilineText from "@/components/styled/MultilineText";
 import WatchOnSection from "@/components/screens/detailScreen/WatchOnSection";
 import Tilt from 'react-parallax-tilt';
+import GenresSection from "@/components/screens/detailScreen/GenresSection";
 
 interface DetailSectionProps {
 
@@ -39,7 +40,7 @@ const DetailSection = ({detail, watchProviders}: DetailSectionProps) => {
                         width={750}
                         loading='lazy'
                         layout="responsive"
-                        style={{objectFit: "cover"}}
+                        style={{objectFit: "contain"}}
                     />
                 </Tilt>
             </Box>
@@ -52,6 +53,8 @@ const DetailSection = ({detail, watchProviders}: DetailSectionProps) => {
                 <Alert severity="info" icon={false}>{detail.tagline}</Alert>
 
                 <MultilineText maxLines={5} variant="subtitle1">{detail.overview}</MultilineText>
+
+                <GenresSection genres={detail.genres}/>
 
                 {watchProviders && watchProviders.length > 0 && <WatchOnSection watchProviders={watchProviders}/>}
             </Stack>
