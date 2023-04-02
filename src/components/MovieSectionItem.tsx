@@ -2,7 +2,7 @@ import React from 'react';
 import Section from "@/data/models/local/Section";
 import {MovieSection} from "@/uiDataHolders/MovieSection";
 import {Box, Button, Stack, Typography, TypographyPropsVariantOverrides} from "@mui/material";
-import MovieItem from "@/components/movieItem/MovieItem";
+import MovieItem from "@/components/MovieItem";
 import BackdropItem from "@/components/BackdropItem/BackdropItem";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import 'react-multi-carousel/lib/styles.css';
@@ -11,9 +11,9 @@ import {Variant} from "@mui/material/styles/createTypography";
 
 interface MovieSectionItemProps {
     headerVariant?: OverridableStringUnion<"inherit" | Variant, TypographyPropsVariantOverrides>
-    itemWidth?:string
+    itemWidth?: string
 
-    canSeeMore?:Boolean
+    canSeeMore?: Boolean
     section: MovieSection
 }
 

@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import * as dataSource from "@/data/datasource/MovieDetailDataSource";
-import {assertIsDefined} from "@/data/utils/AssertDefined";
+import {assertIsDefined} from "@/data/utils/Helpers";
 import {areFulfilled} from "@/data/utils/PromiseFulfilled";
 import Video from "@/data/models/dto/Video";
 import {Image} from "@/data/models/dto/Image";

@@ -3,11 +3,11 @@ import {Box, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText
 import Link from "next/link";
 import NavBarData, {NavBarItem, NavBarSection} from "@/uiDataHolders/NavBarData";
 
-interface HomeNavBarProps {
+interface SideMenuProps {
     data: NavBarData
 }
 
-const HomeSideMenu = ({data}: HomeNavBarProps) => {
+const SideMenu = ({data}: SideMenuProps) => {
 
     const navSection = (section: NavBarSection) => (
         <List>
@@ -31,4 +31,4 @@ const HomeSideMenu = ({data}: HomeNavBarProps) => {
     );
 };
 
-export default HomeSideMenu;
+export default SideMenu;

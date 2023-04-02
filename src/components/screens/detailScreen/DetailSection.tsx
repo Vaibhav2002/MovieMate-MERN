@@ -6,12 +6,12 @@ import Image from "next/image";
 import React from "react";
 import componentStyles from "@/styles/components/components.module.css";
 import MultilineText from "@/components/styled/MultilineText";
-import WatchOnSection from "@/components/screen/detailScreen/WatchOnSection";
-import MovieSectionItem from "@/components/movieSection/MovieSectionItem";
+import WatchOnSection from "@/components/screens/detailScreen/WatchOnSection";
+import MovieSectionItem from "@/components/MovieSectionItem";
 import {MovieSection} from "@/uiDataHolders/MovieSection";
 import Section from "@/data/models/local/Section";
 import Video from "@/data/models/dto/Video";
-import VideoSection from "@/components/screen/detailScreen/VideoSection";
+import VideoSection from "@/components/screens/detailScreen/VideoSection";
 import Tilt from 'react-parallax-tilt';
 
 interface DetailSectionProps {
