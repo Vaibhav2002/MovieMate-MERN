@@ -1,7 +1,6 @@
 import Movie from "@/data/models/dto/Movie";
-import {Box, ImageList, ImageListItem, Theme, useMediaQuery} from "@mui/material";
+import {Box, Theme, useMediaQuery} from "@mui/material";
 import MovieItem from "@/components/MovieItem";
-import {useEffect, useState} from "react";
 
 interface MoviesGridProps {
     movies: Movie[]

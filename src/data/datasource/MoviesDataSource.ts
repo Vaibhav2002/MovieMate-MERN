@@ -2,9 +2,9 @@ import {MoviesResponse} from "@/data/models/dto/Movie";
 import api from "@/data/datasource/TMDBApiClient";
 import {addUrlToMovie} from "@/data/utils/ImageUrlHelper";
 
-const fetchMovies = async (url: string, pageNo: number): Promise<MoviesResponse> => {
+const fetchMovies = async (url: string, page: number): Promise<MoviesResponse> => {
     const response = await api.get<MoviesResponse>(url, {
-        params: {page: pageNo}
+        params: {page: page}
     })
     return response.data
 }
@@ -14,20 +14,33 @@ const addUrlToMovies = (response: MoviesResponse) => ({
     results: response.results.map(addUrlToMovie)
 })
 
-export const fetchTrendingMovies = (pageNo: number = 1) => fetchMovies('/trending/movie/week', pageNo)
+const fetchTrendingMovies = (page: number = 1): Promise<MoviesResponse> => fetchMovies('/trending/movie/week', page)
     .then(addUrlToMovies)
 
-export const fetchPopularMovies = (pageNo: number = 1) => fetchMovies('/movie/popular', pageNo)
+const fetchPopularMovies = (page: number = 1): Promise<MoviesResponse> => fetchMovies('/movie/popular', page)
     .then(addUrlToMovies)
 
-export const fetchLatestMovies = (pageNo: number = 1) => fetchMovies("/movie/latest", pageNo)
+const fetchLatestMovies = (page: number = 1): Promise<MoviesResponse> => fetchMovies("/movie/latest", page)
     .then(addUrlToMovies)
 
-export const fetchTopRatedMovies = (pageNo: number = 1) => fetchMovies("movie/top_rated", pageNo)
+const fetchTopRatedMovies = (page: number = 1): Promise<MoviesResponse> => fetchMovies("movie/top_rated", page)
     .then(addUrlToMovies)
 
-export const fetchNowPlayingMovies = (pageNo: number = 1) => fetchMovies("movie/now_playing", pageNo)
+const fetchNowPlayingMovies = (page: number = 1): Promise<MoviesResponse> => fetchMovies("movie/now_playing", page)
     .then(addUrlToMovies)
 
-export const fetchUpcomingMovies = (pageNo: number = 1) => fetchMovies("movie/upcoming", pageNo)
+const fetchUpcomingMovies = (page: number = 1): Promise<MoviesResponse> => fetchMovies("movie/upcoming", page)
     .then(addUrlToMovies)
+
+const fetchMoviesByGenre = (id: number, page: number = 1): Promise<MoviesResponse> => fetchMovies(`/discover/movie?with_genres=${id}`, page)
+    .then(addUrlToMovies)
+
+export {
+    fetchTrendingMovies,
+    fetchPopularMovies,
+    fetchLatestMovies,
+    fetchTopRatedMovies,
+    fetchNowPlayingMovies,
+    fetchUpcomingMovies,
+    fetchMoviesByGenre
+}
