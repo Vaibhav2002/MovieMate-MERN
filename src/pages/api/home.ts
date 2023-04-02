@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .map(response => response.value)
         .map((result, index): MovieSection => ({
             header: sections[index],
-            movies: result.results ? result.results.map(addUrlToMovie) : []
+            movies: result.results
         }))
         .map(list => (list.header === Section.Trending)
             ? {...list, movies: list.movies.slice(0, 8)}

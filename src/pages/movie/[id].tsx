@@ -8,13 +8,13 @@ import {DetailScreenData} from "@/uiDataHolders/DetailScreenData";
 import axios from "axios";
 import {Image as ImageDto} from "@/data/models/dto/Image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import BackdropBackground from "@/components/screen/detailScreen/BackdropBackground";
+import BackdropBackground from "@/components/screens/detailScreen/BackdropBackground";
 import {Box} from "@mui/material";
-import DetailSection from "@/components/screen/detailScreen/DetailSection";
+import DetailSection from "@/components/screens/detailScreen/DetailSection";
 
 export const getServerSideProps: GetServerSideProps<DetailScreenProps> = async ({params}) => {
     const id = params!.id
-    const data = (await axios.get<DetailScreenData>(`${getBaseUrl()}/api/movie?id=${id}`)).data
+    const data = (await axios.get<DetailScreenData>(`${getBaseUrl()}/api/detail?id=${id}`)).data
     return {
         props: {
             detail: data.detail,
@@ -39,13 +39,13 @@ interface DetailScreenProps {
 const DetailScreen = (
     {detail, backdrops, videos, similarMovies, recommendations, watchProviders}: DetailScreenProps
 ) => {
-
+    const isBackdropsNotNullOrEmpty = backdrops && backdrops.length > 0
 
     console.log(backdrops?.at(0)?.height + " " + backdrops?.at(0)?.width)
     return (
         <main>
             <Box position="relative">
-                {backdrops && <BackdropBackground title={detail.title} backdrops={backdrops}/>}
+                {isBackdropsNotNullOrEmpty && <BackdropBackground title={detail.title} backdrops={backdrops}/>}
 
                 <Box
                     width="100%"
