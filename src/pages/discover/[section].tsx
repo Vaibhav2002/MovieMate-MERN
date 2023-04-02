@@ -6,15 +6,16 @@ import {SectionDataResponse} from "@/pages/api/movies/[slug]";
 import {getBaseUrl} from "@/data/utils/ServerSideBaseUrl";
 import Movie from "@/data/models/dto/Movie";
 import Section, {nonMovieSpecificSections} from "@/data/models/local/Section";
-import {Box, Button, Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import SideMenu from "@/components/SideMenu";
 import React, {useCallback, useMemo} from "react";
 import {getSectionRoute} from "@/Routes";
 import NavBarData, {NavBarItem} from "@/uiDataHolders/NavBarData";
 import MoviesGrid from "@/components/screens/discoverSection/MoviesGrid";
 import {useRouter} from "next/router";
+import PageNavigationItem from "@/components/PageNavigationItem";
 
-export const getServerSideProps: GetServerSideProps<DiscoverSectionProps> = async (context) => {
+export const getServerSideProps: GetServerSideProps<DiscoverSectionScreenProps> = async (context) => {
     assertIsDefined(context.params)
     const slug = context.params!.section as string
     const section = getSectionFromSlug(slug)
@@ -32,14 +33,14 @@ export const getServerSideProps: GetServerSideProps<DiscoverSectionProps> = asyn
     }
 }
 
-interface DiscoverSectionProps {
+interface DiscoverSectionScreenProps {
     section: Section
     movies: Movie[]
     page: number
     isLastPage: boolean
 }
 
-const DiscoverSection = ({section, movies, page, isLastPage}: DiscoverSectionProps) => {
+const DiscoverSectionScreen = ({section, movies, page, isLastPage}: DiscoverSectionScreenProps) => {
     const router = useRouter()
     const isFirstPage = page === 1
 
@@ -60,22 +61,9 @@ const DiscoverSection = ({section, movies, page, isLastPage}: DiscoverSectionPro
             <SideMenu data={navBarData}/>
         </Box>, [navBarData]);
 
-    const nextPage = useCallback(() => {
-        router.push(getSectionRoute(section, page + 1))
-    }, [page, router, section])
+    const nextPage = () => router.push(getSectionRoute(section, page + 1))
 
-    const prevPage = useCallback(
-        () => {router.back()}, [router],
-    );
-
-    const nextButton = useMemo(() =>
-            <Button variant="text" disabled={isLastPage} onClick={nextPage}>Next</Button>
-        , [isLastPage, nextPage])
-
-    const prevButton = useMemo(() =>
-            <Button variant="text" disabled={isFirstPage} onClick={prevPage}>Prev</Button>
-        , [isFirstPage, prevPage])
-
+    const prevPage = () => router.back()
 
     return (
         <Box
@@ -88,15 +76,19 @@ const DiscoverSection = ({section, movies, page, isLastPage}: DiscoverSectionPro
 
                 <MoviesGrid movies={movies}/>
 
-                <Box display="flex" justifyContent="space-between" marginY={4}>
-                    {prevButton}
-                    <Typography variant="button">Page {page}</Typography>
-                    {nextButton}
+                <Box marginY={4}>
+                    <PageNavigationItem
+                        page={page}
+                        isLastPage={isLastPage}
+                        isFirstPage={isFirstPage}
+                        onNextPage={nextPage}
+                        onPrevPage={prevPage}/>
                 </Box>
+
             </Box>
         </Box>
 
     )
 }
 
-export default DiscoverSection
+export default DiscoverSectionScreen
