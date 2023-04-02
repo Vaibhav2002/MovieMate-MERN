@@ -8,7 +8,7 @@ export default interface Movie {
     poster_path: string;
     adult: boolean;
     overview: string;
-    release_date: Date;
+    release_date: string;
     genre_ids: number[];
     id: number;
     original_title: string;

@@ -1,6 +1,6 @@
 import {MovieDetail} from "@/data/models/dto/MovieDetail";
 import {WatchProvider} from "@/data/models/dto/WatchProvider";
-import {Alert, Box, Chip, Stack, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Alert, Box, Stack, useMediaQuery, useTheme} from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import componentStyles from "@/styles/components/components.module.css";
@@ -8,9 +8,7 @@ import MultilineText from "@/components/styled/MultilineText";
 import WatchOnSection from "@/components/screens/detailScreen/WatchOnSection";
 import Tilt from 'react-parallax-tilt';
 import GenresSection from "@/components/screens/detailScreen/GenresSection";
-import RectChip from "@/components/styled/RectChip";
-import {roundTo2Decimals} from "@/data/utils/Helpers";
-import {StarRounded} from "@mui/icons-material";
+import MovieExtraDetails from "@/components/MovieExtraDetails";
 
 interface DetailSectionProps {
 
@@ -52,7 +50,7 @@ const DetailSection = ({detail, watchProviders}: DetailSectionProps) => {
             <Stack direction="column" sx={{overflowX: "hidden"}} flex={1} spacing={2}>
 
 
-                <MultilineText maxLines={2} marginTop={-2} variant={isBelowSm ? "h5" : "h2"}>
+                <MultilineText maxLines={2} variant={isBelowSm ? "h5" : "h2"}>
                     {detail.title}
                 </MultilineText>
 
@@ -60,11 +58,7 @@ const DetailSection = ({detail, watchProviders}: DetailSectionProps) => {
 
                 <MultilineText maxLines={5} variant="subtitle1">{detail.overview}</MultilineText>
 
-                <Stack direction="row" spacing={2} alignItems="center">
-                    <Typography variant="h6">{year}</Typography>
-                    {detail.adult && <RectChip variant="outlined" label="Adult" color="error"/>}
-                    <RectChip label={roundTo2Decimals(detail.vote_average)} color="warning" icon={<StarRounded/>}/>
-                </Stack>
+                <MovieExtraDetails year={year} isAdult={detail.adult} rating={detail.vote_average}/>
                 <GenresSection genres={detail.genres}/>
 
                 {watchProviders && watchProviders.length > 0 && <WatchOnSection watchProviders={watchProviders}/>}

@@ -3,11 +3,12 @@ import {Box} from "@mui/system";
 import Image from "next/image";
 import styles from "./BackdropItem.module.css";
 import MultilineText from "@/components/styled/MultilineText";
-import {useMediaQuery, useTheme} from "@mui/material";
+import {Theme, useMediaQuery, useTheme} from "@mui/material";
 import BottomGradientBox from "@/components/styled/BottomGradientBox";
 import Link from "next/link";
 import {getMovieRoute} from "@/Routes";
 import Movie from "@/data/models/dto/Movie";
+import MovieExtraDetails from "@/components/MovieExtraDetails";
 
 interface BackdropItemProps {
     movie:Movie
@@ -16,8 +17,10 @@ interface BackdropItemProps {
 
 const BackdropItem = ({movie, className}: BackdropItemProps) => {
 
-    const theme = useTheme()
-    const useSmallBreakpoint = useMediaQuery(theme.breakpoints.up("sm"))
+    const isBelowSm = useMediaQuery((theme:Theme) => theme.breakpoints.down("sm"))
+    const year = movie.release_date.split("-")[0]
+    const titleSize = isBelowSm ? "h6" : "h4"
+    const bodySize = isBelowSm ? "caption" : "body2"
 
     return (
         <Box
@@ -47,21 +50,24 @@ const BackdropItem = ({movie, className}: BackdropItemProps) => {
                 }}
             >
                 <MultilineText
-                    maxLines={useSmallBreakpoint ? 2 : 1}
+                    maxLines={isBelowSm ? 2 : 1}
                     width={1}
-                    variant="h4"
+                    variant={titleSize}
                 >
                     {movie.title}
                 </MultilineText>
 
                 <MultilineText
-                    maxLines={useSmallBreakpoint ? 3 : 2}
+                    maxLines={isBelowSm ? 3 : 2}
                     width={1}
-                    variant="body2"
+                    variant={bodySize}
                     color="text.secondary"
+                    marginBottom={isBelowSm ? 0 : 2}
                 >
                     {movie.overview}
                 </MultilineText>
+
+                {!isBelowSm && <MovieExtraDetails size="small" year={year} isAdult={movie.adult} rating={movie.vote_average}/>}
             </Box>
 
         </Box>
