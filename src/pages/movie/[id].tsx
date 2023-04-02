@@ -16,6 +16,7 @@ import Section from "@/data/models/local/Section";
 import React from "react";
 import MovieSectionItem from "@/components/MovieSectionItem";
 import {MovieSection} from "@/uiDataHolders/MovieSection";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps<DetailScreenProps> = async ({params}) => {
     const id = params!.id
@@ -56,37 +57,41 @@ const DetailScreen = (
             section={{header: section, movies: movies} as MovieSection}/>
 
     return (
-        <main>
-            <Box position="relative">
-                {isBackdropsNotNullOrEmpty && <BackdropBackground title={detail.title} backdrops={backdrops}/>}
+        <>
+            <Head>
+                <title key="title">{detail.title}</title>
+            </Head>
+            <main>
+                <Box position="relative">
+                    {isBackdropsNotNullOrEmpty && <BackdropBackground title={detail.title} backdrops={backdrops}/>}
 
-                <Box
-                    width="100%"
-                    padding="10%"
-                    sx={{
-                        position: "absolute",
-                        top: "0",
-                        left: "0",
-                    }}>
+                    <Box
+                        width="100%"
+                        padding="10%"
+                        sx={{
+                            position: "absolute",
+                            top: "0",
+                            left: "0",
+                        }}>
 
-                    <Stack direction="column" height="100%" spacing={4}>
+                        <Stack direction="column" height="100%" spacing={4}>
 
-                        <DetailSection detail={detail} watchProviders={watchProviders}/>
+                            <DetailSection detail={detail} watchProviders={watchProviders}/>
 
-                        {notEmptyOrNull(videos) && <VideoSection title={"Trailers and More"} videos={videos!}/>}
+                            {notEmptyOrNull(videos) && <VideoSection title={"Trailers and More"} videos={videos!}/>}
 
-                        {notEmptyOrNull(recommendations) && movieSection(Section.Recommendations, recommendations!)}
+                            {notEmptyOrNull(recommendations) && movieSection(Section.Recommendations, recommendations!)}
 
-                        {notEmptyOrNull(similarMovies) && movieSection(Section.Similar, similarMovies!)}
+                            {notEmptyOrNull(similarMovies) && movieSection(Section.Similar, similarMovies!)}
 
-                    </Stack>
+                        </Stack>
+
+                    </Box>
+
 
                 </Box>
-
-
-
-            </Box>
-        </main>
+            </main>
+        </>
     )
 
 }

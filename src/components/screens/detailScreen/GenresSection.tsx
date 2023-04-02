@@ -14,12 +14,9 @@ const GenresSection = ({genres}: GenresSectionProps) => {
     return (
         <Stack direction="row" spacing={1}>
             {genres.map(genre =>
-                <RectChip
-                    key={genre.id}
-                    label={genre.name}
-                    component={Link}
-                    href={getGenreRoute(genre)}
-                />
+                <Link key={genre.id} href={getGenreRoute(genre)}>
+                    <RectChip label={genre.name}/>
+                </Link>
             )}
         </Stack>
     )

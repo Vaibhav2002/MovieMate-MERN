@@ -5,13 +5,13 @@ import {Box, Stack} from "@mui/material";
 import React from "react";
 import {BASE_URL} from "@/data/utils/Constants";
 import NavBarData, {NavBarItem} from "@/uiDataHolders/NavBarData";
-import {ExploreRounded, HomeRounded, StarRounded, WhatshotRounded} from "@mui/icons-material";
 import SideMenu from "@/components/SideMenu";
 import MovieSectionItem from "@/components/MovieSectionItem";
 import MovieMateAppBar from "@/components/MovieMateAppBar";
-import Routes, {getGenreRoute, getSectionRoute} from "@/Routes";
+import  {getGenreRoute, getSectionRoute} from "@/Routes";
 import Genre from "@/data/models/dto/Genre";
 import HomeData from "@/uiDataHolders/HomeData";
+import Head from "next/head";
 
 export const getStaticProps: GetStaticProps<HomeScreenProps> = async () => {
     const homeData = (await axios.get<HomeData>(`${BASE_URL}/api/home`)).data
@@ -56,30 +56,36 @@ const HomeScreen = ({movies, genres}: HomeScreenProps) => {
     }
 
     return (
-        <main>
-            <MovieMateAppBar/>
+        <>
+            <Head>
+                <title key="title">MovieMate</title>
+            </Head>
+            <main>
+                <MovieMateAppBar/>
 
-            <Box
-                display="flex"
-                alignItems="flex-start"
-            >
+                <Box
+                    display="flex"
+                    alignItems="flex-start"
+                >
 
-                <Box sx={{display: { xs:"none", md:"fixed" }}}>
-                    <SideMenu data={navBarData}/>
+                    <Box sx={{display: { xs:"none", md:"fixed" }}}>
+                        <SideMenu data={navBarData}/>
+                    </Box>
+
+                    <Box flex="1" sx={{overflowX: "hidden"}}>
+                        <Stack
+                            direction="column"
+                            paddingLeft={2}
+                            spacing={7}
+                            paddingY={2}
+                        >
+                            {movies.map(section => <MovieSectionItem key={section.header} section={section} canSeeMore={true}/>)}
+                        </Stack>
+                    </Box>
                 </Box>
+            </main>
+        </>
 
-                <Box flex="1" sx={{overflowX: "hidden"}}>
-                    <Stack
-                        direction="column"
-                        paddingLeft={2}
-                        spacing={7}
-                        paddingY={2}
-                    >
-                        {movies.map(section => <MovieSectionItem key={section.header} section={section} canSeeMore={true}/>)}
-                    </Stack>
-                </Box>
-            </Box>
-        </main>
     );
 };
 

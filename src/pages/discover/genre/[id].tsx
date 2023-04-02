@@ -8,6 +8,7 @@ import PageNavigationItem from "@/components/PageNavigationItem";
 import React from "react";
 import {useRouter} from "next/router";
 import {getGenreRoute} from "@/Routes";
+import Head from "next/head";
 
 
 export const getServerSideProps: GetServerSideProps<DiscoverGenreProps> = async (context) => {
@@ -40,21 +41,29 @@ const DiscoverGenreScreen = ({genre, movies, page, isLastPage}: DiscoverGenrePro
 
 
     return (
-        <Box sx={{overflowX: "hidden"}} padding={4}>
-            <Typography variant="h4" marginBottom={3}>{genre.name}</Typography>
+        <>
+            <Head>
+                <title key="title">{genre.name} Movies</title>
+            </Head>
+            <main>
+                <Box sx={{overflowX: "hidden"}} padding={4}>
+                    <Typography variant="h4" marginBottom={3}>{genre.name}</Typography>
 
-            <MoviesGrid movies={movies}/>
+                    <MoviesGrid movies={movies}/>
 
-            <Box marginY={4}>
-                <PageNavigationItem
-                    page={page}
-                    isLastPage={isLastPage}
-                    isFirstPage={isFirstPage}
-                    onNextPage={nextPage}
-                    onPrevPage={prevPage}/>
-            </Box>
+                    <Box marginY={4}>
+                        <PageNavigationItem
+                            page={page}
+                            isLastPage={isLastPage}
+                            isFirstPage={isFirstPage}
+                            onNextPage={nextPage}
+                            onPrevPage={prevPage}/>
+                    </Box>
 
-        </Box>
+                </Box>
+
+            </main>
+        </>
     )
 }
 

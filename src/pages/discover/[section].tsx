@@ -14,6 +14,7 @@ import NavBarData, {NavBarItem} from "@/uiDataHolders/NavBarData";
 import MoviesGrid from "@/components/screens/discoverSection/MoviesGrid";
 import {useRouter} from "next/router";
 import PageNavigationItem from "@/components/PageNavigationItem";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps<DiscoverSectionScreenProps> = async (context) => {
     assertIsDefined(context.params)
@@ -66,27 +67,34 @@ const DiscoverSectionScreen = ({section, movies, page, isLastPage}: DiscoverSect
     const prevPage = () => router.back()
 
     return (
-        <Box
-            display="flex"
-            alignItems="flex-start"
-        >
-            {sideMenu}
-            <Box flex="1" sx={{overflowX: "hidden"}} padding={3}>
-                <Typography variant="h4" marginBottom={3}>{section}</Typography>
+        <>
+            <Head>
+                <title key="title">{section} Movies</title>
+            </Head>
+            <main>
+                <Box
+                    display="flex"
+                    alignItems="flex-start"
+                >
+                    {sideMenu}
+                    <Box flex="1" sx={{overflowX: "hidden"}} padding={3}>
+                        <Typography variant="h4" marginBottom={3}>{section}</Typography>
 
-                <MoviesGrid movies={movies}/>
+                        <MoviesGrid movies={movies}/>
 
-                <Box marginY={4}>
-                    <PageNavigationItem
-                        page={page}
-                        isLastPage={isLastPage}
-                        isFirstPage={isFirstPage}
-                        onNextPage={nextPage}
-                        onPrevPage={prevPage}/>
+                        <Box marginY={4}>
+                            <PageNavigationItem
+                                page={page}
+                                isLastPage={isLastPage}
+                                isFirstPage={isFirstPage}
+                                onNextPage={nextPage}
+                                onPrevPage={prevPage}/>
+                        </Box>
+
+                    </Box>
                 </Box>
-
-            </Box>
-        </Box>
+            </main>
+        </>
 
     )
 }
