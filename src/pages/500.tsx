@@ -1,12 +1,11 @@
 import {Box, Typography} from "@mui/material";
 import Image from "next/image";
-import errorImg from "@/public/error.svg";
 
 export default function Custom500(){
     return (
-        <Box display="flex" flexDirection="row">
+        <Box display="flex" flexDirection="row" height="100vh" alignItems="center">
             <Box flex="1">
-                <Image src={errorImg} alt="Error" width="512" height="512"/>
+                <Image src="/error.svg" alt="Error" width={512} height={512}/>
             </Box>
             <Box flex="1" flexWrap="wrap" sx={{overflowX:"hidden"}}>
                 <Typography variant="h3">Oops!</Typography>

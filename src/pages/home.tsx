@@ -1,20 +1,18 @@
 import {MovieSection} from "@/uiDataHolders/MovieSection";
 import {GetStaticProps} from "next";
-import axios from "axios";
 import {Box, Stack} from "@mui/material";
 import React from "react";
-import {BASE_URL} from "@/data/utils/Constants";
 import NavBarData, {NavBarItem} from "@/uiDataHolders/NavBarData";
 import SideMenu from "@/components/SideMenu";
 import MovieSectionItem from "@/components/MovieSectionItem";
 import MovieMateAppBar from "@/components/MovieMateAppBar";
-import  {getGenreRoute, getSectionRoute} from "@/Routes";
+import {getGenreRoute, getSectionRoute} from "@/Routes";
 import Genre from "@/data/models/dto/Genre";
-import HomeData from "@/uiDataHolders/HomeData";
 import Head from "next/head";
+import {fetchHomeData} from "@/pages/api/home";
 
 export const getStaticProps: GetStaticProps<HomeScreenProps> = async () => {
-    const homeData = (await axios.get<HomeData>(`${BASE_URL}/api/home`)).data
+    const homeData = await fetchHomeData()
 
     return {
         props: {

@@ -6,8 +6,7 @@ import Section from "@/data/models/local/Section";
 import {getGenres} from "@/data/datasource/CommonDataSource";
 import HomeData from "@/uiDataHolders/HomeData";
 
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export const fetchHomeData = async () => {
     const trendingMovies = datasource.fetchTrendingMovies()
     const nowPlayingMovies = datasource.fetchNowPlayingMovies()
     const upcomingMovies = datasource.fetchUpcomingMovies()
@@ -40,9 +39,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const genres = (await getGenres()).slice(0, 10)
 
-    const homeData:HomeData = {
+    return {
         genres: genres,
         sections: movieList
-    }
+    } as HomeData
+}
+
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    const homeData:HomeData = await fetchHomeData()
     return res.status(200).json(homeData)
 }
