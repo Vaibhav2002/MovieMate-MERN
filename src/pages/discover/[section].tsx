@@ -1,5 +1,9 @@
 import {GetServerSideProps} from "next";
+import {assertIsDefined} from "@/data/utils/Helpers";
 import {getSectionFromSlug} from "@/data/utils/SectionUtils";
+import axios from "axios";
+import {SectionDataResponse} from "@/pages/api/movies/[slug]";
+import {BASE_URL} from "@/data/utils/Constants";
 import Movie from "@/data/models/dto/Movie";
 import Section, {nonMovieSpecificSections} from "@/data/models/local/Section";
 import {Box, Typography} from "@mui/material";
@@ -11,21 +15,21 @@ import MoviesGrid from "@/components/screens/discoverSection/MoviesGrid";
 import {useRouter} from "next/router";
 import PageNavigationItem from "@/components/PageNavigationItem";
 import Head from "next/head";
-import getDiscoverSectionScreenData from "@/data/repo/DiscoverSectionScreenRepo";
 
 export const getServerSideProps: GetServerSideProps<DiscoverSectionScreenProps> = async (context) => {
+    assertIsDefined(context.params)
     const slug = context.params!.section as string
     const section = getSectionFromSlug(slug)
     const page = context.query.page as string
 
-    const response = await getDiscoverSectionScreenData(section, parseInt(page))
+    const response = await axios.get<SectionDataResponse>(`${BASE_URL}/api/movies/${slug}?page=${page}`)
 
     return {
         props: {
             section: section,
-            movies: response.movies,
+            movies: response.data.movies,
             page: parseInt(page),
-            isLastPage: response.isLastPage
+            isLastPage: response.data.isLastPage
         }
     }
 }

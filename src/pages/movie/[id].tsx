@@ -3,6 +3,9 @@ import Video from "@/data/models/dto/Video";
 import Movie from "@/data/models/dto/Movie";
 import {WatchProvider} from "@/data/models/dto/WatchProvider";
 import {GetServerSideProps} from "next";
+import {BASE_URL} from "@/data/utils/Constants";
+import {DetailScreenData} from "@/uiDataHolders/DetailScreenData";
+import axios from "axios";
 import {Image as ImageDto} from "@/data/models/dto/Image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import BackdropBackground from "@/components/screens/detailScreen/BackdropBackground";
@@ -14,11 +17,10 @@ import React from "react";
 import MovieSectionItem from "@/components/MovieSectionItem";
 import {MovieSection} from "@/uiDataHolders/MovieSection";
 import Head from "next/head";
-import getMovieDetailScreenData from "@/data/repo/MovieDetailScreenRepo";
 
 export const getServerSideProps: GetServerSideProps<DetailScreenProps> = async ({params}) => {
     const id = params!.id
-    const data = await getMovieDetailScreenData(parseInt(id as string))
+    const data = (await axios.get<DetailScreenData>(`${BASE_URL}/api/detail?id=${id}`)).data
     return {
         props: {
             detail: data.detail,
