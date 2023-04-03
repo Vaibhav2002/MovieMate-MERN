@@ -22,14 +22,14 @@ export const getServerSideProps: GetServerSideProps<DiscoverSectionScreenProps> 
     const section = getSectionFromSlug(slug)
     const page = context.query.page as string
 
-    const response = await axios.get<SectionDataResponse>(`${BASE_URL}/api/movies/${slug}?page=${page}`)
-
+    // const response = await axios.get<SectionDataResponse>(`${BASE_URL}/api/movies/${slug}?page=${page}`)
+    console.log(process.env.BASE_URL)
     return {
         props: {
             section: section,
-            movies: response.data.movies,
+            movies: [],
             page: parseInt(page),
-            isLastPage: response.data.isLastPage
+            isLastPage: false
         }
     }
 }
