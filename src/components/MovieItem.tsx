@@ -6,7 +6,6 @@ import componentStyles from "@/styles/components/components.module.css";
 import Link from "next/link";
 import {getMovieRoute} from "@/Routes";
 import {roundTo2Decimals} from "@/data/utils/Helpers";
-import {StarRounded} from "@mui/icons-material";
 import RectChip from "@/components/styled/RectChip";
 
 interface MovieItemProps {
@@ -43,7 +42,6 @@ const MovieItem = ({width, movie, className}: MovieItemProps) => {
                     label={roundTo2Decimals(movie.vote_average)}
                     color="secondary"
                     size="small"
-                    icon={<StarRounded/>}
                 />
             </Box>
 

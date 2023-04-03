@@ -1,5 +1,4 @@
 import {GetServerSideProps} from "next";
-import {assertIsDefined} from "@/data/utils/Helpers";
 import {getSectionFromSlug} from "@/data/utils/SectionUtils";
 import axios from "axios";
 import {SectionDataResponse} from "@/pages/api/movies/[slug]";

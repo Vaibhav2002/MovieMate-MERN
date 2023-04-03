@@ -20,7 +20,6 @@ const SideMenu = ({data}: SideMenuProps) => {
     const navButtons = (items: NavBarItem[]) => (items.map(item =>
         <ListItem key={item.name} disablePadding>
             <ListItemButton component={Link} href={item.href}>
-                {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
                 <ListItemText primary={item.name}/>
             </ListItemButton>
         </ListItem>
