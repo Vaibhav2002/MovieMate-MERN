@@ -28,15 +28,21 @@ function getResponsePromise(section: Section, page: number): Promise<MoviesRespo
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const {slug, page} = req.query
-    assertIsDefined(slug)
-    assertIsDefined(page)
-    const section = getSectionFromSlug(slug as string)
-    const response = await getResponsePromise(section, parseFloat(page as string))
-    const isLastPage = response.page === response.total_pages
-    const result: SectionDataResponse = {
-        movies: response.results,
-        isLastPage: isLastPage,
+    try {
+        const {slug, page} = req.query
+        assertIsDefined(slug)
+        assertIsDefined(page)
+        const section = getSectionFromSlug(slug as string)
+        const response = await getResponsePromise(section, parseFloat(page as string))
+        const isLastPage = response.page === response.total_pages
+        const result: SectionDataResponse = {
+            movies: response.results,
+            isLastPage: isLastPage,
+        }
+        return res.status(200).json(result)
+    } catch (e: any) {
+        console.error(e)
+        return res.status(500).json({error: e.message})
     }
-    return res.status(200).json(result)
+
 }
