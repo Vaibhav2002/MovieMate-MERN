@@ -27,7 +27,7 @@ const typography: TypographyOptions = {
         letterSpacing: '0em',
     },
     h4: {
-        fontFamily: 'Urbanist',
+        fontFamily: 'Montserrat',
         fontWeight: 600,
         fontSize: '2.125rem',
         letterSpacing: '0.00735em',
