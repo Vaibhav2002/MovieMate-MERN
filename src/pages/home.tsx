@@ -9,10 +9,10 @@ import MovieMateAppBar from "@/components/MovieMateAppBar";
 import {getGenreRoute, getSectionRoute} from "@/Routes";
 import Genre from "@/data/models/dto/Genre";
 import Head from "next/head";
-import {fetchHomeData} from "@/pages/api/home";
+import {getHomeScreenData} from "@/data/repo/HomeScreenRepo";
 
 export const getStaticProps: GetStaticProps<HomeScreenProps> = async () => {
-    const homeData = await fetchHomeData()
+    const homeData = await getHomeScreenData()
 
     return {
         props: {
