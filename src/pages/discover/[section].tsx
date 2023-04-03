@@ -17,19 +17,18 @@ import PageNavigationItem from "@/components/PageNavigationItem";
 import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps<DiscoverSectionScreenProps> = async (context) => {
-    assertIsDefined(context.params)
     const slug = context.params!.section as string
     const section = getSectionFromSlug(slug)
     const page = context.query.page as string
 
-    // const response = await axios.get<SectionDataResponse>(`${BASE_URL}/api/movies/${slug}?page=${page}`)
+    const response = await axios.get<SectionDataResponse>(`${BASE_URL}/api/movies/${slug}?page=${page}`)
     console.log(process.env.BASE_URL)
     return {
         props: {
             section: section,
-            movies: [],
+            movies: response.data.movies,
             page: parseInt(page),
-            isLastPage: false
+            isLastPage: response.data.isLastPage
         }
     }
 }
