@@ -19,7 +19,7 @@ const MovieExtraDetails = ({year, isAdult, rating, size}:MovieExtraDetailsProps)
         <Stack direction="row" spacing={2} alignItems="center">
             <Typography variant={textSize}>{year}</Typography>
             {isAdult && <RectChip size={itemSize} variant="outlined" label="Adult" color="error"/>}
-            <RectChip size={itemSize} label={roundTo2Decimals(rating)} color="warning" icon={<StarRounded/>}/>
+            <RectChip size={itemSize} label={roundTo2Decimals(rating)} color="warning"/>
         </Stack>
     )
 }
