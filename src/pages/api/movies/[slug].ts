@@ -30,6 +30,8 @@ function getResponsePromise(section: Section, page: number): Promise<MoviesRespo
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         const {slug, page} = req.query
+        assertIsDefined(slug)
+        assertIsDefined(page)
         const section = getSectionFromSlug(slug as string)
         const response = await getResponsePromise(section, parseFloat(page as string))
         const isLastPage = response.page === response.total_pages
