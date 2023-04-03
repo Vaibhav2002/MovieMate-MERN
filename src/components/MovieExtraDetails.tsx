@@ -1,8 +1,8 @@
 import {Stack, Typography} from "@mui/material";
 import RectChip from "@/components/styled/RectChip";
 import {roundTo2Decimals} from "@/data/utils/Helpers";
-import {StarRounded} from "@mui/icons-material";
 import React from "react";
+import {BsStarFill} from "react-icons/bs";
 
 interface MovieExtraDetailsProps {
     year: string;
@@ -19,7 +19,7 @@ const MovieExtraDetails = ({year, isAdult, rating, size}:MovieExtraDetailsProps)
         <Stack direction="row" spacing={2} alignItems="center">
             <Typography variant={textSize}>{year}</Typography>
             {isAdult && <RectChip size={itemSize} variant="outlined" label="Adult" color="error"/>}
-            <RectChip size={itemSize} label={roundTo2Decimals(rating)} color="warning"/>
+            <RectChip icon={<BsStarFill size="16px"/>} size={itemSize} label={roundTo2Decimals(rating)} color="secondary"/>
         </Stack>
     )
 }

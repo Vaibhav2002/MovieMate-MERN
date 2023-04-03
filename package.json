@@ -11,9 +11,6 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@fortawesome/fontawesome-svg-core": "^6.3.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.10",
     "@types/node": "18.15.3",
     "@types/react": "18.0.28",
@@ -25,6 +22,7 @@
     "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.8.0",
     "react-multi-carousel": "^2.8.2",
     "react-parallax-tilt": "^1.7.121",
     "react-responsive-carousel": "^3.2.23",
