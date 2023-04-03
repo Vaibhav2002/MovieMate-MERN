@@ -52,7 +52,6 @@ class Similar {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         const movieId = req.query.id
-        assertIsDefined(movieId)
         const id = parseInt(movieId as string)
 
         const detail = await dataSource.getMovieDetails(id)
@@ -98,6 +97,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } catch (e:any) {
         res.status(500).json({error: e.message})
     }
-
-
 }
