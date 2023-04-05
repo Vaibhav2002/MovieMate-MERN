@@ -1,38 +1,110 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![MovieMate](graphics/banners/banner.gif)
 
-## Getting Started
+# **MovieMate**
 
-First, run the development server:
+Discover your next favorite movie with MovieMate - the ultimate movie guide with a hand-picked selection of the best
+films.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## About 🎯
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+MovieMate is a movies showcasing web app built using the MERN Stack.
+On MovieMate, how can see our curated list of content, immersive detail of movie and find out the perfect movie to
+watch.
+MovieMate uses the power of NextJS and ReactJS to provide blazing fast content and a great user experience.
+From Static Side Generation to ServerSide Rendering to API Routes, it's all there in MovieMate.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Try it out
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+You can try MovieMate by visiting: https://moviemate-app.vercel.app/
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## MovieMate for you 🔥
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![Home](graphics/banners/banner-home.gif)
+![Detail](graphics/banners/banner-detail.gif)
+![Sections](graphics/banners/banner-section.gif)
+![Genre](graphics/banners/banner-genre.gif)
 
-## Learn More
+[//]: # (Add Screenshots)
 
-To learn more about Next.js, take a look at the following resources:
+## 📸 Screenshots 🖥️
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+|                                                |                                              |
+|------------------------------------------------|----------------------------------------------|
+| ![](graphics/screenshots/desktop/home.png)     | ![](graphics/screenshots/desktop/detail.png) |
+| ![](graphics/screenshots/desktop/sections.png) | ![](graphics/screenshots/desktop/genres.png) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 📸 Screenshots 📱
 
-## Deploy on Vercel
+|                                                |                                              |
+|------------------------------------------------|----------------------------------------------|
+| ![](graphics/screenshots/mobile/home.jpeg)     | ![](graphics/screenshots/mobile/detail.jpeg) |
+| ![](graphics/screenshots/mobile/sections.jpeg) | ![](graphics/screenshots/mobile/genres.png)  |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technical details 💡
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- MovieMate is created using NextJS, ReactJS and MaterialUI.
+- MovieMate uses the power of
+  NextJS [ServerSide rendering](https://nextjs.org/docs/basic-features/pages#server-side-rendering) to provide content
+  blazing fast.
+- The HomeScreen of MovieMate
+  uses [Static Site Generation](https://nextjs.org/docs/basic-features/pages#static-generation)
+  with [Incremental Static Regeneration](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration)
+  set to every hour which makes it load instantly, so you dont have to wait.
+- MovieMate uses the power of NextJs Api routes to make api calls to TMDB Api and prepare data for the screen
+- MovieMate is highly responsive and looks great on all devices.
+- All the React components and package structure is properly organized.
+
+## Tech Stack
+
+- [NextJs](https://nextjs.org) - Next.js enables you to create full-stack web applications by extending the latest React
+  features, and integrating powerful Rust-based JavaScript tooling for the fastest builds.
+- [React](https://react.dev) - The library for web and native user interfaces.
+- [MaterialUI](https://mui.com) - MUI offers a comprehensive suite of UI tools to help you ship new features faster.
+- [Axios](https://axios-http.com) - Promise based HTTP client for the browser and node.js
+- [TMDB API](https://www.themoviedb.org) - The Movie Database (TMDb) is a community built movie and TV database.
+- [Typescript](https://www.typescriptlang.org) - TypeScript is a strongly typed programming language that builds on
+  JavaScript, giving you better tooling at any scale.
+
+## Project Setup ✏️
+
+To clone this project and customize it further, you need to do a couple of tasks first:
+
+1) Clone this project. You can directly download the source code .zip file, or you can use the git clone command in
+   terminal
+2) Once successful, open your preferred IDE and run some tasks and write some setup code.
+3) Run the following commands in your terminal
+
+    ```
+    npm install
+    ```
+
+4) After this, create a new file with the exact name of ".env.local"
+5) In the .env file, write:<br><br>
+
+    ```
+    TMDB_API_KEY=Your TMDB API Key
+    BASE_URL=For development use http://localhost:3000 and for production use the domain on which you are hosting the app
+    ```
+
+6) You are all set up now! To start the app in development mode, run:
+
+    ```
+    next dev
+    ```
+
+7) And to start the frontend in production mode, run:
+
+    ```
+    next build
+    next start
+    ```
+
+8) Then write localhost:3000 in your browser to be able to use MovieMate!
+
+---
+
+## Contact
+
+If you need any help, you can connect with me.
+
+Visit:- [Vaibhav Jaiswal](https://vaibhavjaiswal.vercel.app/#/)
