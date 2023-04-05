@@ -37,7 +37,7 @@ You can try MovieMate by visiting: https://moviemate-app.vercel.app/
 
 |                                                |                                              |                                                |                                              |
 |------------------------------------------------|----------------------------------------------|------------------------------------------------|----------------------------------------------|
-| ![](graphics/screenshots/mobile/home.jpeg)     | ![](graphics/screenshots/mobile/detail.jpeg) | ![](graphics/screenshots/mobile/sections.jpeg) | ![](graphics/screenshots/mobile/genres.png)  |
+| ![](graphics/screenshots/mobile/home.jpeg)     | ![](graphics/screenshots/mobile/detail.jpeg) | ![](graphics/screenshots/mobile/sections.jpeg) | ![](graphics/screenshots/mobile/genres.jpeg) |
 
 
 ## Technical details 💡
