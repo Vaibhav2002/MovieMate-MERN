@@ -3,6 +3,7 @@ import {Image} from "@/data/models/dto/Image";
 import Movie from "@/data/models/dto/Movie";
 import {WatchProvider} from "@/data/models/dto/WatchProvider";
 import Video from "@/data/models/dto/Video";
+import {Cast} from "@/data/models/dto/Cast";
 
 export interface DetailScreenData {
     detail: MovieDetail
@@ -16,4 +17,6 @@ export interface DetailScreenData {
     recommendations: Movie[] | null
 
     watchProviders: WatchProvider[] | null
+
+    cast:Cast[] | null
 }

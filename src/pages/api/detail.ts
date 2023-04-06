@@ -7,6 +7,7 @@ import {Image} from "@/data/models/dto/Image";
 import Movie from "@/data/models/dto/Movie";
 import {WatchProvider} from "@/data/models/dto/WatchProvider";
 import {DetailScreenData} from "@/uiDataHolders/DetailScreenData";
+import {Cast} from "@/data/models/dto/Cast";
 
 class Reco {
     movies: Movie[]
@@ -48,6 +49,14 @@ class Similar {
     }
 }
 
+class MovieCast {
+    cast: Cast[]
+
+    constructor(cast: Cast[]) {
+        this.cast = cast
+    }
+}
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
@@ -63,10 +72,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const similar = dataSource.getSimilarMovies(id).then(res => new Similar(res))
         const watchProviders = dataSource.getWatchProviders(id).then(res => new Watch(res))
+        const cast = dataSource.getMovieCast(id).then(res => new MovieCast(res))
 
 
         const responses = await Promise.allSettled(
-            [videos, images, recommendations, similar, watchProviders]
+            [videos, images, recommendations, similar, watchProviders, cast]
         )
 
         let videosData: Video[] | null = null
@@ -74,6 +84,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         let recoData: Movie[] | null = null
         let similarData: Movie[] | null = null
         let watchProvidersData: WatchProvider[] | null = null
+        let castData: Cast[] | null = null
 
         responses.filter(areFulfilled)
             .map(response => response.value)
@@ -83,6 +94,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 else if (response instanceof Reco) recoData = response.movies
                 else if (response instanceof Similar) similarData = response.movies
                 else if (response instanceof Watch) watchProvidersData = response.watchProviders
+                else if (response instanceof MovieCast) castData = response.cast
             })
 
         const detailScreenData: DetailScreenData = {
@@ -91,11 +103,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             backdrops: imagesData,
             recommendations: recoData,
             similarMovies: similarData,
-            watchProviders: watchProvidersData
+            watchProviders: watchProvidersData,
+            cast: castData
         }
 
         res.status(200).json(detailScreenData)
-    } catch (e:any) {
+    } catch (e: any) {
         res.status(500).json({error: e.message})
     }
 }
