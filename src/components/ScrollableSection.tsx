@@ -6,16 +6,21 @@ import Link from "next/link";
 
 interface ScrollableRowProps {
     children: React.ReactNode[]
-    header: string
+    header?: string
     headerVariant?: OverridableStringUnion<"inherit" | Variant, TypographyPropsVariantOverrides>
     canSeeMore?: Boolean
 
-    headerHref: string
+    headerHref?: string
+
+    compact?: boolean
 }
 
-const ScrollableRow = ({children, header, headerVariant, canSeeMore, headerHref}: ScrollableRowProps) => {
+const ScrollableSection = (
+    {children, header, headerVariant, canSeeMore, headerHref, compact}: ScrollableRowProps
+) => {
+    const isCompact = compact ?? false
     return (
-        <Box>
+        <Stack direction="column" spacing={isCompact ? 1 : 2}>
             <Box
                 display="flex"
                 justifyContent="space-between"
@@ -23,20 +28,21 @@ const ScrollableRow = ({children, header, headerVariant, canSeeMore, headerHref}
                 paddingRight={2}
                 alignItems="center"
             >
-                <Typography variant={headerVariant ?? "h5"}>{header}</Typography>
+                {header && <Typography variant={headerVariant ?? "h5"}>{header}</Typography>}
                 {canSeeMore && <Button variant="text" component={Link} href={headerHref}>See More</Button>}
             </Box>
 
             <Stack
                 direction="row"
-                marginTop={2}
-                spacing={2}
+                spacing={isCompact ? 1.5 : 2}
                 paddingRight={2}
                 style={{overflowX: "auto"}}
-            >{children}</Stack>
+            >
+                {children}
+            </Stack>
 
-        </Box>
+        </Stack>
     )
 }
 
-export default ScrollableRow;
+export default ScrollableSection;

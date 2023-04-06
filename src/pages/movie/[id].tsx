@@ -57,7 +57,7 @@ const DetailScreen = (
     const movieSection = (section: Section, movies: Movie[]) =>
         <MovieSectionItem
             headerVariant="h6"
-            itemWidth="120px"
+            itemWidth="124px"
             canSeeMore={false}
             section={{header: section, movies: movies} as MovieSection}/>
 
