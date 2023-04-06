@@ -1,5 +1,5 @@
 import {Cast} from "@/data/models/dto/Cast";
-import ScrollableRow from "@/components/ScrollableRow";
+import ScrollableSection from "@/components/ScrollableSection";
 import CastItem from "@/components/CastItem";
 
 interface CaseSectionProps {
@@ -8,14 +8,14 @@ interface CaseSectionProps {
 
 const CastSection = ({cast}: CaseSectionProps) => {
     return (
-        <ScrollableRow
+        <ScrollableSection
             header="Cast"
             canSeeMore={false}
             headerVariant="h6"
             headerHref=""
         >
             {cast.map(cast => <CastItem key={cast.id} cast={cast}/>)}
-        </ScrollableRow>
+        </ScrollableSection>
     )
 }
 

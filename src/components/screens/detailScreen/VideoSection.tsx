@@ -1,6 +1,6 @@
 import Video from "@/data/models/dto/Video";
-import {Box, Stack, Typography} from "@mui/material";
 import YouTube from "react-youtube";
+import ScrollableSection from "@/components/ScrollableSection";
 
 interface VideoSectionProps {
 
@@ -19,13 +19,9 @@ const VideoSection = ({title, videos}: VideoSectionProps) => {
     />
 
     return (
-        <Box>
-            <Typography variant="h6" marginBottom={2}>{title}</Typography>
-            <Stack direction="row" spacing={2} sx={{overflowX: "auto"}}>
-                {videos.map(video => ytItem(video))}
-            </Stack>
-
-        </Box>
+        <ScrollableSection header={title} headerVariant="h6">
+            {videos.map(video => ytItem(video))}
+        </ScrollableSection>
     );
 };
 
