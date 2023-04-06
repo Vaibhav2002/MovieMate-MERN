@@ -17,6 +17,8 @@ import React from "react";
 import MovieSectionItem from "@/components/MovieSectionItem";
 import {MovieSection} from "@/uiDataHolders/MovieSection";
 import Head from "next/head";
+import {Cast} from "@/data/models/dto/Cast";
+import CastSection from "@/components/screens/detailScreen/CastSection";
 
 export const getServerSideProps: GetServerSideProps<DetailScreenProps> = async ({params}) => {
     const id = params!.id
@@ -28,7 +30,8 @@ export const getServerSideProps: GetServerSideProps<DetailScreenProps> = async (
             videos: data.videos,
             similarMovies: data.similarMovies,
             recommendations: data.recommendations,
-            watchProviders: data.watchProviders
+            watchProviders: data.watchProviders,
+            cast: data.cast
         }
     }
 }
@@ -40,10 +43,12 @@ interface DetailScreenProps {
     similarMovies: Movie[] | null
     recommendations: Movie[] | null
     watchProviders: WatchProvider[] | null
+
+    cast:Cast[] | null
 }
 
 const DetailScreen = (
-    {detail, backdrops, videos, similarMovies, recommendations, watchProviders}: DetailScreenProps
+    {detail, backdrops, videos, similarMovies, recommendations, watchProviders, cast}: DetailScreenProps
 ) => {
     const isBackdropsNotNullOrEmpty = backdrops && backdrops.length > 0
 
@@ -79,6 +84,8 @@ const DetailScreen = (
                             <DetailSection detail={detail} watchProviders={watchProviders}/>
 
                             {notEmptyOrNull(videos) && <VideoSection title={"Trailers and More"} videos={videos!}/>}
+
+                            {notEmptyOrNull(cast) && <CastSection cast={cast!}/> }
 
                             {notEmptyOrNull(recommendations) && movieSection(Section.Recommendations, recommendations!)}
 

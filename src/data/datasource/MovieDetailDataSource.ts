@@ -9,8 +9,10 @@ import {
     backgroundBackdropUrl,
     getBackdropUrl,
     getLogoUrl,
-    getPosterUrlLarge
+    getPosterUrlLarge,
+    getProfileUrl
 } from "@/data/utils/ImageUrlHelper";
+import {CastResponse} from "@/data/models/dto/Cast";
 
 const getMovieInfo = async <T>(id: number, url: string): Promise<T> => {
     const response = await api.get<T>(`movie/${id}${url}`)
@@ -54,4 +56,13 @@ export const getWatchProviders = (id: number) => getMovieInfo<WatchProviderRespo
     .then(response => response.map(provider => ({
         ...provider,
         logo_path: getLogoUrl(provider.logo_path)
+    })))
+
+export const getMovieCast = (id: number) => getMovieInfo<CastResponse>(id, `/credits`)
+    .then(response => response.cast)
+    .then(response => response.sort((a, b) => a.order - b.order))
+    .then(response => response.slice(0, 10))
+    .then(response => response.map(cast => ({
+        ...cast,
+        profile_path: cast?.profile_path ? getProfileUrl(cast.profile_path) : null
     })))
